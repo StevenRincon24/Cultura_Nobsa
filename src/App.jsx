@@ -4,6 +4,8 @@ import Banner from "./components/Banner";
 import InformacionNobsa from "./components/InformacionNobsa";
 import Hoteles from "./components/Hoteles";
 import Footer from "./components/Fotter";
+import RutaGastronomica from "./components/Gastronomia";
+import EventosNobsa from "./components/Eventos";
 function App() {
   return (
     <Router>
@@ -11,6 +13,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Banner />} />
         <Route path="/hoteles" element={<Hoteles />} />
+        <Route path="/gastronomia" element={<RutaGastronomica />} />
+        <Route path="/eventos" element={<EventosNobsa />} />
       </Routes>
       <Footer />
     </Router>
