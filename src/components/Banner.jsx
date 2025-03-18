@@ -4,9 +4,9 @@ import InformacionNobsa from "./Index/InformacionNobsa";
 import DescrubreNobsa from "./Index/DescubreNobsa";
 import Turismo from "./Index/AtractivosTuristicos";
 const images = [
-  "../src/imagenes/banner/iglesia.jpg",
-  "../src/imagenes/banner/nobsa1.jpg",
-  "../src/imagenes/banner/nobsa2.jpeg",
+  "https://i.postimg.cc/prJqP7Px/iglesia.jpg",
+  "https://i.postimg.cc/Wzv5LjLX/nobsa1.jpg",
+  "https://i.postimg.cc/yd9Lbx5D/nobsa2.jpg",
 ];
 
 const SLIDE_DURATION = 6000; // Duración en milisegundos
@@ -30,9 +30,9 @@ export default function Carousel() {
   }, []);
 
   return (
-    <div className="mt-10 p-6 transition-colors text-white w-full">
+    <div className="mt-10 p-6 transition-colors text-white w-screen">
       {/* Carousel Wrapper */}
-      <div className="overflow-hidden relative flex items-center justify-center sm:h-64 xl:h-100 2xl:h-96">
+      <div className="overflow-hidden relative flex sm:h-64 xl:h-100 2xl:h-96">
         {images.map((img, index) => (
           <img
             key={index}
