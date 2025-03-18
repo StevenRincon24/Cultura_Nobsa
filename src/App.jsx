@@ -18,7 +18,7 @@ function App() {
             <Route path="/" element={<Banner />} />
             <Route path="/hoteles" element={<Hoteles />} />
             <Route path="/gastronomia" element={<RutaGastronomica />} />
-            <Route path="/eventos" element={<IndexFiestas />} />
+            <Route path="/eventos" element={<EventosNobsa />} />
           </Routes>
         </div>
         <ChatBotButton />
