@@ -1,85 +1,111 @@
-import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { FaLightbulb, FaChurch, FaMusic, FaSun } from "react-icons/fa";
+import React, { useState } from "react";
+import { Modal } from "./Modal";
+import { festivities } from "@/data/festivities";// Eliminé Festivity ya que no usamos TypeScript
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { TimelineEvent } from "./TimelineEvent";
+function App() {
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-const eventos = [
-  {
-    fecha: "20",
-    mes: "marzo",
-    nombre: "Día de la Ruana",
-    descripcion:
-      "Celebración de la icónica prenda de Nobsa con desfiles y concursos.",
-    imagen:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2daKpgljuiCHmns9XBflB-SA7NzpBoqMZqg&s",
-  },
-  {
-    fecha: "22",
-    mes: "marzo",
-    nombre: "Festival Vallenato",
-    descripcion: "Evento musical con los mejores exponentes del vallenato.",
-    imagen:
-      "https://prd-files.sentirvallenato.com/images/noticias-de-actualidad-codiscos-1730995528742.jpeg",
-  },
-  {
-    fecha: "25",
-    mes: "marzo",
-    nombre: "Fiestas de la Virgen de Belencito y Jesús Obrero",
-    descripcion: "Eventos religiosos y culturales en honor a los patronos.",
-    imagen: "/images/virgen.jpg",
-  },
-  {
-    fecha: "10",
-    mes: "abril",
-    nombre: "Fiestas de San Roque y Efrias Municipales",
-    descripcion: "Celebraciones tradicionales con danzas y música en vivo.",
-    imagen: "/images/sanroque.jpg",
-  },
-  {
-    fecha: "5",
-    mes: "diciembre",
-    nombre: "Iluminación Navideña",
-    descripcion: "Encendido de luces con decoraciones en todo el municipio.",
-    imagen: "/images/iluminacion.jpg",
-  },
-  {
-    fecha: "15",
-    mes: "diciembre",
-    nombre: "Pesebre y Muestras Culturales",
-    descripcion: "Exhibición de pesebres y presentaciones artísticas.",
-    imagen: "/images/pesebre.jpg",
-  },
-];
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
-export default function EventosNobsa() {
+  const handleEventClick = (festivity) => {
+    setSelectedEvent(festivity);
+    setIsModalOpen(true);
+  };
+
   return (
-    <div className="container mx-auto p-6 mt-30">
-      <h1 className="text-3xl font-bold text-center mb-6">
-        Eventos y Fiestas en Nobsa
-      </h1>
-      <div className="space-y-8">
-        {eventos.map((evento, index) => (
-          <motion.div
-            key={index}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="flex border-b border-gray-300 pb-6"
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 py-12 px-4">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold text-center text-gray-900 mb-8">
+          Colombian Festivities Timeline
+        </h1>
+
+        <div className="relative overflow-x-auto">
+          <div className="flex space-x-8 p-6 min-w-max">
+            {months.map((month, index) => {
+              const monthFestivities = festivities.filter(
+                (f) => f.month === index + 1
+              );
+
+              return (
+                <div
+                  key={month}
+                  className="flex flex-col items-center min-w-[200px]"
+                >
+                  <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                    {month}
+                  </h2>
+                  <div className="flex flex-col space-y-6">
+                    {monthFestivities.map((festivity) => (
+                      <TimelineEvent
+                        key={festivity.id}
+                        date={festivity.date}
+                        title={festivity.title}
+                        image={festivity.image}
+                        description={festivity.description}
+                        onClick={() => handleEventClick(festivity)}
+                      />
+                    ))}
+                    {monthFestivities.length === 0 && (
+                      <div className="h-48 w-48 flex items-center justify-center text-gray-400 border-2 border-dashed rounded-lg">
+                        No tenemos eventos este
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="flex justify-center mt-4 space-x-4">
+          <button
+            className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50"
+            onClick={() => {
+              const container = document.querySelector(".overflow-x-auto");
+              if (container) container.scrollLeft -= 300;
+            }}
           >
-            <div className="w-16 flex flex-col items-center text-gray-700 font-bold">
-              <span className="text-3xl">{evento.fecha}</span>
-              <span className="uppercase text-sm">{evento.mes}</span>
-            </div>
-            <Card className="flex-1 flex p-4 bg-white shadow-lg rounded-xl border border-gray-200">
-              <div className="w-2/3 pr-4">
-                <h2 className="text-xl font-semibold">{evento.nombre}</h2>
-                <p className="text-gray-600">{evento.descripcion}</p>
-              </div>
-              <div className="w-1/3">
-                <img src={evento.imagen} alt={evento.nombre} className="rounded-lg" />
-              </div>
-            </Card>
-          </motion.div>
-        ))}
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50"
+            onClick={() => {
+              const container = document.querySelector(".overflow-x-auto");
+              if (container) container.scrollLeft += 300;
+            }}
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        </div>
       </div>
+
+      {selectedEvent && (
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          title={selectedEvent.title}
+          date={selectedEvent.date}
+          description={selectedEvent.description}
+          image={selectedEvent.image}
+        />
+      )}
     </div>
   );
 }
+
+export default App;

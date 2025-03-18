@@ -80,9 +80,9 @@ export default function Navbar() {
       <div className="flex justify-between items-center p-4 md:px-8">
         <div className="flex items-center space-x-4">
           <img
-            src="../src/imagenes/logo_nobsa.png"
+            src="https://i.postimg.cc/fbMZCBs1/logo-alcaldia-horizontal-nuevo.png"
             alt="Logo"
-            className="h-16"
+            className="h-20"
           />
           <button
             onClick={() => setIsOpen(!isOpen)}

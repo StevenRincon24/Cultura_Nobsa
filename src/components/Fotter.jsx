@@ -20,7 +20,7 @@ const Footer = () => {
         {/* Sección Derecha */}
         <div className="flex flex-col items-center justify-center h-full text-center md:text-left space-y-2">
           <img
-            src="../src/imagenes/logo_nobsa.png"
+            src="https://i.postimg.cc/fbMZCBs1/logo-alcaldia-horizontal-nuevo.png"
             alt="Logo"
             className="h-20 hover:scale-105 transition duration-300"
           />

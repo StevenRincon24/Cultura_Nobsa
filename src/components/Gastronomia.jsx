@@ -21,7 +21,8 @@ const postres = [
     src: "https://directoriohoreca.com/sites/default/files/%C2%BFQu%C3%A9%20es%20un%20helado%20artesanal%20y%20que%20diferencia%20existen%20con%20uno%20industrial%20%281%29.jpg",
     name: "Helado Artesanal",
     desc: "Helado casero con sabores naturales.",
-  },
+  }
+  
 ];
 
 const restaurantes = [
@@ -34,6 +35,30 @@ const restaurantes = [
     src: "https://via.placeholder.com/300",
     name: "Sabores Campestres",
     info: "Menú variado con ingredientes locales.",
+  },
+  
+  {
+    src: "https://directoriohoreca.com/sites/default/files/%C2%BFQu%C3%A9%20es%20un%20helado%20artesanal%20y%20que%20diferencia%20existen%20con%20uno%20industrial%20%281%29.jpg",
+    name: "Helado Artesanal",
+    desc: "Helado casero con sabores naturales.",
+  },
+  ,
+  {
+    src: "https://directoriohoreca.com/sites/default/files/%C2%BFQu%C3%A9%20es%20un%20helado%20artesanal%20y%20que%20diferencia%20existen%20con%20uno%20industrial%20%281%29.jpg",
+    name: "Helado Artesanal",
+    desc: "Helado casero con sabores naturales.",
+  },
+  ,
+  {
+    src: "https://directoriohoreca.com/sites/default/files/%C2%BFQu%C3%A9%20es%20un%20helado%20artesanal%20y%20que%20diferencia%20existen%20con%20uno%20industrial%20%281%29.jpg",
+    name: "Helado Artesanal",
+    desc: "Helado casero con sabores naturales.",
+  },
+  ,
+  {
+    src: "https://directoriohoreca.com/sites/default/files/%C2%BFQu%C3%A9%20es%20un%20helado%20artesanal%20y%20que%20diferencia%20existen%20con%20uno%20industrial%20%281%29.jpg",
+    name: "Helado Artesanal",
+    desc: "Helado casero con sabores naturales.",
   },
 ];
 
@@ -79,7 +104,7 @@ export default function RutaGastronomica() {
   };
 
   return (
-    <div className="grid md:grid-cols-2 gap-8 p-8 mt-30">
+    <div className="grid md:grid-cols-2 gap-8 p-8 mt-10">
       <div>
         <h2 className="text-2xl font-bold mb-4 text-gray-800">
           Postres Deliciosos
@@ -110,8 +135,8 @@ export default function RutaGastronomica() {
 
       {/* Sección de Restaurantes */}
       <div>
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">
-          🐔 Restaurantes especializados en gallina 🐔
+        <h2 className="text-2xl font-bold mb-4 text-gray-800 mt-20">
+          Conoce la ruta de la gallina 🐔
         </h2>
         <p>¡Buen provecho! 🍽️</p>
 

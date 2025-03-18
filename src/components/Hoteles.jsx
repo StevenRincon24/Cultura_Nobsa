@@ -72,7 +72,7 @@ export default function Hoteles() {
   };
 
   return (
-    <div className="mt-20 p-6 bg-gray-50 transition-colors text-white min-h-screen">
+    <div className="mt-10 p-6 transition-colors text-white min-h-screen">
       <div className="text-center mb-12">
         <BedDouble className="mx-auto h-12 w-12 text-emerald-600 dark:text-emerald-400" />
         <h1 className="mt-4 text-4xl font-bold text-gray-900 ">
