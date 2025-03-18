@@ -4,7 +4,7 @@ function InformacionNobsa() {
 
   return (
     <>
-      <section className="bg-white">
+      <section className="bg-white w-full">
         <div className="mx-auto max-w-screen-xl lg:flex lg:items-center lg:gap-16">
           {/* Columna de texto */}
           <motion.div

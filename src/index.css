@@ -7,45 +7,7 @@
 @source "./node_modules/flowbite";
 
 /* Asegurar que el body y html ocupen toda la altura */
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
 
-/* Contenedor principal con flexbox */
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  /* Ocupa toda la pantalla */
-}
-
-/* Hacer que el NavBar sea fijo */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: white;
-  /* Asegurar que sea visible */
-  z-index: 1000;
-  /* Para que quede por encima del contenido */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Ajustar el contenido para que no se superponga con el NavBar */
-.main-content {
-  flex-grow: 1;
-  /* Ajustar según la altura del NavBar */
-}
-
-/* Footer siempre al final */
-.footer {
-  width: 100%;
-  margin-top: auto;
-}
 
 @font-face {
   font-family: "Maitland Script";

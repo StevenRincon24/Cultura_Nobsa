@@ -41,7 +41,7 @@ const cards = [
 function DescrubreNobsa() {
   return (
     <>
-      <section className="">
+      <section className="w-full">
         <div className="w-full bg-gray-100 p-6">
           <div className="w-full bg-white shadow-lg rounded-2xl p-6 text-center">
             <h2

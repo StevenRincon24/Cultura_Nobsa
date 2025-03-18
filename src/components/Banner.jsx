@@ -30,7 +30,7 @@ export default function Carousel() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center max-w-screen-2xl">
+    <div className="mt-10 p-6 transition-colors text-white w-full">
       {/* Carousel Wrapper */}
       <div className="overflow-hidden relative flex items-center justify-center sm:h-64 xl:h-100 2xl:h-96">
         {images.map((img, index) => (
@@ -56,7 +56,7 @@ export default function Carousel() {
       </div>
 
       {/* Tarjetas de información */}
-      <div className="flex justify-center items-center py-8 w-full">
+      <div className="flex justify-center items-center w-full">
         <DescrubreNobsa />
       </div>
 
