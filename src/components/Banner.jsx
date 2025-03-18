@@ -30,9 +30,9 @@ export default function Carousel() {
   }, []);
 
   return (
-    <div className="flex-wrap items-center max-w-screen-2xl">
+    <div className="flex flex-col items-center max-w-screen-2xl">
       {/* Carousel Wrapper */}
-      <div className="overflow-hidden relative  sm:h-64 xl:h-100 2xl:h-96">
+      <div className="overflow-hidden relative flex items-center justify-center sm:h-64 xl:h-100 2xl:h-96">
         {images.map((img, index) => (
           <img
             key={index}
@@ -46,21 +46,22 @@ export default function Carousel() {
       </div>
 
       {/* Información de Nobsa */}
-      <div className=" py-8">
+      <div className="flex justify-center items-center py-8 w-full">
         <InformacionNobsa />
       </div>
 
-      {/* TARJETAS SOBRE INFORMACION DE ESCUDOS DE NOBSA*/}
-      <div className="">
+      {/* TARJETAS SOBRE INFORMACION DE ESCUDOS DE NOBSA */}
+      <div className="flex justify-center items-center w-full">
         <NobsaInfoSection />
       </div>
 
       {/* Tarjetas de información */}
-      <div className="py-8">
+      <div className="flex justify-center items-center py-8 w-full">
         <DescrubreNobsa />
       </div>
 
-      <div >
+      {/* Turismo */}
+      <div className="flex justify-center items-center w-full">
         <Turismo />
       </div>
     </div>
