@@ -5,7 +5,7 @@ import InformacionNobsa from "./components/Index/InformacionNobsa";
 import Hoteles from "./components/Hospedaje/Hoteles";
 import Footer from "./components/Fotter";
 import RutaGastronomica from "./components/Gastronomia/Gastronomia";
-import EventosNobsa from "./components/Eventos";
+import EventosNobsa from "./components/Fiestas/Eventos";
 import ChatBotButton from "./components/Boot/ChatBot";
 import IndexFiestas from "./components/Fiestas/IndexFiestas";
 import { useEffect, useState } from "react";
@@ -42,9 +42,7 @@ function App() {
             <Route path="/gastronomia" element={<RutaGastronomica />} />
             <Route
               path="/eventos"
-              element={
-                isMobile ? <EventosNobsa /> : <IndexFiestas />
-              } // Cambia según el dispositivo
+              element={isMobile ? <EventosNobsa /> : <IndexFiestas />} // Cambia según el dispositivo
             />
           </Routes>
         </div>

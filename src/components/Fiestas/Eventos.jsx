@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Modal } from "./Modal";
-import { festivities } from "@/data/festivities";// Eliminé Festivity ya que no usamos TypeScript
+import { Modal } from "../Modal";
+import { festivities } from "@/data/festivities"; // Eliminé Festivity ya que no usamos TypeScript
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { TimelineEvent } from "./TimelineEvent";
+import { TimelineEvent } from "../TimelineEvent";
 function App() {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
