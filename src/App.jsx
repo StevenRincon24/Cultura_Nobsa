@@ -9,7 +9,13 @@ import EventosNobsa from "./components/Fiestas/Eventos";
 import ChatBotButton from "./components/Boot/ChatBot";
 import IndexFiestas from "./components/Fiestas/IndexFiestas";
 import { useEffect, useState } from "react";
-
+import RegisterPage from "./components/RegistroUsuarios/Registro";
+import { AuthProvider } from "./context/AuthContext";
+import { HotelProvider } from "./context/HotelContext";
+import Login from "./components/Login/Login";
+import RutasProtegidas from "./components/RutasProtegidas";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // Hook personalizado para detectar si la pantalla es móvil
 function useMediaQuery(query) {
   const [matches, setMatches] = useState(false);
@@ -28,28 +34,39 @@ function useMediaQuery(query) {
 }
 
 function App() {
-  // Detectar si el dispositivo es móvil (ancho <= 768px)
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
-    <Router>
-      <div className="app-container">
-        <NavBar />
-        <div className="main-content">
-          <Routes>
-            <Route path="/" element={<Banner />} />
-            <Route path="/hoteles" element={<Hoteles />} />
-            <Route path="/gastronomia" element={<RutaGastronomica />} />
-            <Route
-              path="/eventos"
-              element={isMobile ? <EventosNobsa /> : <IndexFiestas />} // Cambia según el dispositivo
-            />
-          </Routes>
-        </div>
-        <ChatBotButton />
-        <Footer />
-      </div>
-    </Router>
+    <AuthProvider>
+      <HotelProvider>
+        <ToastContainer />
+
+        <Router>
+          <div className="app-container">
+            <NavBar className="navbar" />{" "}
+            {/* Asegúrate de que la clase sea correcta */}
+            <div className="main-content">
+              <Routes>
+                <Route path="/" element={<Banner />} />
+                <Route path="/login" element={<Login />} />
+
+                <Route element={<RutasProtegidas />}>
+                  <Route path="/registro" element={<RegisterPage />} />
+                </Route>
+                <Route path="/gastronomia" element={<RutaGastronomica />} />
+                <Route
+                  path="/eventos"
+                  element={isMobile ? <EventosNobsa /> : <IndexFiestas />} // Cambia según el dispositivo
+                />
+                <Route path="/hoteles" element={<Hoteles />} />
+              </Routes>
+            </div>
+            <ChatBotButton />
+            <Footer />
+          </div>
+        </Router>
+      </HotelProvider>
+    </AuthProvider>
   );
 }
 

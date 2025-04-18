@@ -7,6 +7,7 @@
 @source "./node_modules/flowbite";
 
 /* Asegurar que el body y html ocupen toda la altura */
+/* Asegurar que el body y html ocupen toda la altura */
 html,
 body {
   height: 100%;
@@ -19,7 +20,6 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  /* Ocupa toda la pantalla */
 }
 
 /* Hacer que el NavBar sea fijo */
@@ -28,17 +28,16 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: white;
-  /* Asegurar que sea visible */
   z-index: 1000;
-  /* Para que quede por encima del contenido */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 60px;
+  /* Define la altura del NavBar */
 }
 
-/* Ajustar el contenido para que no se superponga con el NavBar */
 .main-content {
   flex-grow: 1;
-  /* Ajustar según la altura del NavBar */
+  margin-top: calc(100px);
 }
 
 /* Footer siempre al final */
@@ -66,4 +65,75 @@ body {
   src: url("/src/fonts/Avenir.ttc") format("truetype");
   font-weight: normal;
   font-style: normal;
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.25);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-zoom {
+  animation: zoom 25s ease-in-out forwards;
+  /* Cambia 6s por la duración que desees */
+}
+
+@layer components {
+  .container-custom {
+    @apply container mx-auto px-4 md:px-8;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12;
+  }
+
+  .section-subtitle {
+    @apply text-lg md:text-xl text-center max-w-3xl mx-auto mb-12 text-gray-600;
+  }
+
+  .btn-primary {
+    @apply bg-red-700 hover:bg-red-800 text-white font-semibold py-2 px-6 rounded-md transition-all duration-300 inline-block;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border-2 border-red-700 text-red-700 hover:bg-red-700 hover:text-white font-semibold py-2 px-6 rounded-md transition-all duration-300 inline-block;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg;
+  }
+
+  .navbar-link {
+    @apply relative font-medium px-2 py-1 hover:text-red-700 transition-colors duration-300 before:content-[''] before:absolute before:bottom-0 before:left-0 before:w-0 before:h-0.5 before:bg-red-700 before:transition-all before:duration-300 hover:before:w-full;
+  }
+
+  .navbar-link-active {
+    @apply text-red-700 before:w-full;
+  }
+
+  .slide-in-left {
+    @apply opacity-0 translate-x-[-50px] transition-all duration-700;
+  }
+
+  .slide-in-right {
+    @apply opacity-0 translate-x-[50px] transition-all duration-700;
+  }
+
+  .fade-in {
+    @apply opacity-0 transition-opacity duration-700;
+  }
+
+  .slide-in-left.appear,
+  .slide-in-right.appear,
+  .fade-in.appear {
+    @apply opacity-100 translate-x-0;
+  }
 }

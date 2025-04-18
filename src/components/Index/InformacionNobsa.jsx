@@ -1,70 +1,68 @@
-import { motion } from "framer-motion";
+import React from "react";
+import AnimatedSection from "../ui/AnimatedSection";
+import SectionTitle from "../ui/SectionTitle";
+import { aboutContent } from "@/data/content";
 
-function InformacionNobsa() {
-
+const About = () => {
   return (
-    <>
-      <section className="bg-white w-full">
-        <div className="mx-auto max-w-screen-xl lg:flex lg:items-center lg:gap-16">
-          {/* Columna de texto */}
-          <motion.div
-            className="lg:w-1/2 text-center lg:text-left"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2
-              style={{ fontFamily: "Maitland Script" }}
-              className="text-8xl text-red-900 text-center"
-            >
-              Sabías que...
-            </h2>
-            <motion.p>
-              <b className="extrabold">Nobsa</b> es un municipio del
-              departamento de Boyacá, situado en el centro oriente de Colombia,
-              en la región del Alto Chicamocha.
-            </motion.p>
-            <ul className="list-disc list-inside text-gray-700 text-lg">
-              <motion.p whileHover={{ scale: 1.05 }}>
-                Pertenece a la provincia del Sugamuxi.
-              </motion.p>
-              <motion.p whileHover={{ scale: 1.05 }}>
-                Fundada en 1593 por Jerónimo Holguín y declarado municipio en
-                1811.
-              </motion.p>
-              <br />
-              <motion.p whileHover={{ scale: 1.05 }}>
-                Tiene el carácter y el sentido equivalente de nobleza según la
-                organización muisca.
-              </motion.p>
-              <motion.p whileHover={{ scale: 1.05 }}>
-                Nobsa se encuentra a 7 km de Sogamoso, 63 km de Tunja y a 3
-                horas de Bogotá.
-              </motion.p>
-              <motion.p whileHover={{ scale: 1.05 }}>
-                Su gentilicio es Nobsano (a).
-              </motion.p>
-            </ul>
-          </motion.div>
+    <section className="bg-white py-16 md:py-24">
+      <div className="container-custom">
+        <AnimatedSection>
+          <SectionTitle
+            title={aboutContent.title}
+            subtitle={aboutContent.subtitle}
+          />
+        </AnimatedSection>
 
-          {/* Columna de imagen */}
-          <motion.div
-            className="lg:w-1/2 flex justify-center"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-          >
-            <motion.img
-              src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/20/5c/61/caption.jpg?w=1200&h=-1&s=1"
-              alt="Imagen de Nobsa"
-              className="rounded-lg shadow-lg w-full h-auto max-w-md"
-              whileHover={{ scale: 1.05 }}
-            />
-          </motion.div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center text-justify">
+          <AnimatedSection animation="slide-in-left">
+            <div className="space-y-6">
+              <p className="text-lg text-gray-600">
+                {aboutContent.description}
+              </p>
+
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+                {aboutContent.stats.map((stat, index) => (
+                  <div key={index} className="text-center">
+                    <div className="text-2xl font-bold text-red-700 mb-1">
+                      {stat.value}
+                    </div>
+                    <div className="text-sm text-gray-600">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-4">
+                {aboutContent.features.map((feature, index) => (
+                  <div
+                    key={index}
+                    className="bg-gray-300 p-4 rounded-lg shadow-sm"
+                  >
+                    <h3 className="text-lg font-semibold mb-2 text-red-600">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-600">{feature.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection animation="slide-in-right">
+            <div className="relative h-[600px] rounded-lg overflow-hidden shadow-xl">
+              <img
+                src={aboutContent.image}
+                alt="Vista de Nobsa"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            </div>
+          </AnimatedSection>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
-}
+};
 
-export default InformacionNobsa;
+export default About;
+

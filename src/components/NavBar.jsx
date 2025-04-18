@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   FaBars,
@@ -7,73 +7,34 @@ import {
   FaLandmark,
   FaCalendarAlt,
   FaHotel,
-  FaChartLine,
-  FaLeaf,
   FaHome,
+  FaChevronDown,
 } from "react-icons/fa";
-import { RiLoginCircleLine } from "react-icons/ri";
+import { RiLoginCircleLine, RiLogoutCircleLine } from "react-icons/ri";
+import { useAuth } from "@/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-const menuItems = [
-  {
-    label: "Inicio",
-    icon: <FaHome />,
-    color: "bg-red-400",
-    hoverColor: "hover:bg-blue-700",
-    textColor: "text-red-900",
-    activeTextColor: "text-red-300",
-    link: "/",
-  },
-  {
-    label: "GASTRONOMÍA",
-    icon: <FaUtensils />,
-    color: "bg-blue-500",
-    hoverColor: "hover:bg-blue-700",
-    textColor: "text-blue-900",
-    activeTextColor: "text-blue-300",
-    link: "/gastronomia",
-  },
-  {
-    label: "PATRIMONIO",
-    icon: <FaLandmark />,
-    color: "bg-lime-400",
-    hoverColor: "hover:bg-lime-600",
-    textColor: "text-lime-900",
-    activeTextColor: "text-lime-300",
-    link: "/patrimonio",
-  },
-  {
-    label: "EVENTOS",
-    icon: <FaCalendarAlt />,
-    color: "bg-yellow-400",
-    hoverColor: "hover:bg-yellow-600",
-    textColor: "text-yellow-900",
-    activeTextColor: "text-yellow-300",
-    link: "/eventos",
-  },
-  {
-    label: "HOSPEDAJE",
-    icon: <FaHotel />,
-    color: "bg-orange-500",
-    hoverColor: "hover:bg-orange-700",
-    textColor: "text-orange-900",
-    activeTextColor: "text-orange-900",
-    link: "/hoteles",
-  },
-
-  {
-    label: "INICAR SESIÓN",
-    icon: <RiLoginCircleLine />,
-    color: "bg-blue-200",
-    hoverColor: "hover:bg-gray-700",
-    textColor: "text-purple-900",
-    activeTextColor: "text-purple-300",
-    link: "/login",
-  },
-];
-
-export default function Navbar() {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+
+  const { isAuthenticated, logOut, user } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const menuItems = [
+    { label: "Inicio", icon: <FaHome />, link: "/" },
+    { label: "GASTRONOMÍA", icon: <FaUtensils />, link: "/gastronomia" },
+    { label: "PATRIMONIO", icon: <FaLandmark />, link: "/patrimonio" },
+    { label: "EVENTOS", icon: <FaCalendarAlt />, link: "/eventos" },
+    { label: "HOSPEDAJE", icon: <FaHotel />, link: "/hoteles" },
+  ];
+
+  // Cerrar menú al cambiar ruta
+  useEffect(() => {
+    setIsOpen(false);
+    setUserMenuOpen(false);
+  }, [location]);
 
   return (
     <nav className="shadow-md bg-white w-full fixed top-0 left-0 z-50">
@@ -87,6 +48,7 @@ export default function Navbar() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="text-2xl md:hidden focus:outline-none"
+            aria-label="Toggle menu"
           >
             {isOpen ? <FaTimes /> : <FaBars />}
           </button>
@@ -97,27 +59,82 @@ export default function Navbar() {
             isOpen ? "block" : "hidden"
           }`}
         >
-          <ul className="flex flex-col md:flex-row md:space-x-2 p-4 md:p-0">
-            {menuItems.map((item, index) => {
-              const isActive = location.pathname === item.link;
+          <ul className="flex flex-col md:flex-row md:space-x-4 p-4 md:p-0">
+            {menuItems.map((item, index) => (
+              <li key={index} className="w-full md:w-auto">
+                <Link
+                  to={item.link}
+                  className={`flex items-center gap-2 px-4 py-2 font-semibold rounded transition-all duration-300 ${
+                    location.pathname === item.link
+                      ? "text-blue-500"
+                      : "text-gray-900"
+                  } hover:bg-gray-200`}
+                >
+                  {item.icon}
+                  {item.label}
+                </Link>
+              </li>
+            ))}
 
-              return (
-                <li key={index} className="w-full md:w-auto">
-                  <Link
-                    to={item.link}
-                    className={`flex items-center gap-2 px-4 py-2 font-semibold rounded transition-all duration-300 w-full md:w-auto ${
-                      isActive ? item.activeTextColor : "text-white-900"
-                    } ${item.color} ${item.hoverColor} hover:text-gray-200`}
-                  >
-                    {item.icon}
-                    {item.label}
-                  </Link>
-                </li>
-              );
-            })}
+            {isAuthenticated ? (
+              <li className="relative">
+                <button
+                  onClick={() => setUserMenuOpen(!userMenuOpen)}
+                  className="flex items-center gap-2 px-4 py-2 font-semibold rounded bg-blue-500 text-white  transition-all"
+                >
+                  {user.username}
+                  <FaChevronDown
+                    className={`transform transition-transform duration-200 ${
+                      userMenuOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {userMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-md z-50">
+                    <Link
+                      to="/perfil"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Perfil
+                    </Link>
+                    <Link
+                      to="/registro"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Crear usuario
+                    </Link>
+                    <button
+                      onClick={() => {
+                        logOut(navigate);
+                        setUserMenuOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500"
+                    >
+                      <div className="flex items-center gap-2">
+                        <RiLogoutCircleLine />
+                        Cerrar sesión
+                      </div>
+                    </button>
+                  </div>
+                )}
+              </li>
+            ) : (
+              <li>
+                <Link
+                  to="/login"
+                  className="flex items-center gap-2 px-4 py-2 font-semibold rounded bg-blue-500 text-white hover:bg-blue-700 transition-all"
+                >
+                  <RiLoginCircleLine />
+                  Iniciar Sesión
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>
     </nav>
   );
-}
+};
+
+export default Navbar;

@@ -40,7 +40,7 @@ export default function Turismo() {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full bg-gray-100 p-6">
+    <div className="w-full  p-6">
       <div className="w-full bg-white shadow-lg rounded-2xl p-6 text-center">
         <h1
           className="text-6xl sm:text-5xl font-extralight text-red-700 mb-4"
@@ -60,7 +60,7 @@ export default function Turismo() {
             {categories.map((category, index) => (
               <div
                 key={index}
-                className={`flex flex-col items-center border ${category.color} rounded-full px-3 py-2 transition-transform transform hover:scale-105 cursor-pointer w-60`}
+                className={`flex flex-col  border ${category.color} rounded-full px-3 py-2 transition-transform transform hover:scale-105 cursor-pointer w-60`}
               >
                 <span className="text-lg">{category.icon}</span>
                 <span className="mt-1 text-sm font-medium text-center">

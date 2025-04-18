@@ -1,4 +1,5 @@
 import { FaFacebook, FaTwitter, FaYoutube } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -12,9 +13,12 @@ const Footer = () => {
             <FaTwitter className="text-2xl cursor-pointer hover:text-blue-400 transition duration-300" />
             <FaYoutube className="text-2xl cursor-pointer hover:text-red-500 transition duration-300" />
           </div>
-          <button className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg font-bold hover:bg-red-600 transition duration-300">
-            USUARIO ADMIN
-          </button>
+          <Link
+            className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg font-bold hover:bg-red-600 transition duration-300"
+            to="/login"
+          >
+            USUARIO ADMINISTRADOR
+          </Link>
         </div>
 
         {/* Sección Derecha */}

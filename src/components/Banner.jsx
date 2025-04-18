@@ -3,13 +3,14 @@ import NobsaInfoSection from "./Index/NobsaInfoSection";
 import InformacionNobsa from "./Index/InformacionNobsa";
 import DescrubreNobsa from "./Index/DescubreNobsa";
 import Turismo from "./Index/AtractivosTuristicos";
+
 const images = [
   "https://i.postimg.cc/prJqP7Px/iglesia.jpg",
   "https://i.postimg.cc/Wzv5LjLX/nobsa1.jpg",
   "https://i.postimg.cc/yd9Lbx5D/nobsa2.jpg",
 ];
 
-const SLIDE_DURATION = 6000; // Duración en milisegundos
+const SLIDE_DURATION = 25000;
 
 export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,31 +19,41 @@ export default function Carousel() {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
-  const prevSlide = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length
-    );
-  };
-
   useEffect(() => {
-    const interval = setInterval(nextSlide, 3000);
+    const interval = setInterval(nextSlide, SLIDE_DURATION);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="mt-10 p-6 transition-colors text-white w-screen">
+    <div className="transition-colors text-white">
       {/* Carousel Wrapper */}
-      <div className="overflow-hidden relative flex sm:h-64 xl:h-100 2xl:h-96">
+      <div className="overflow-hidden relative flex sm:h-64 xl:h-[500px] 2xl:h-[600px]">
         {images.map((img, index) => (
           <img
             key={index}
             src={img}
-            className={`absolute w-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-700 ease-in-out ${
-              index === currentIndex ? "opacity-100" : "opacity-0"
+            className={`absolute w-full h-full object-cover top-0 left-0 transition-opacity duration-700 ease-in-out ${
+              index === currentIndex
+                ? "opacity-100 scale-125 animate-zoom"
+                : "opacity-0 scale-100"
             }`}
             alt={`Slide ${index + 1}`}
           />
         ))}
+
+        {/* Texto superpuesto sobre el carrusel */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 bg-black/40">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
+            Bienvenidos a Nobsa
+          </h1>
+          <h2 className="text-2xl md:text-4xl font-bold mb-4">
+            Un tesoro cultural en el corazón de Boyacá
+          </h2>
+          <p className="text-lg md:text-xl max-w-2xl">
+            Descubre la magia de nuestras tradiciones, la belleza de nuestros
+            paisajes y la calidez de nuestra gente.
+          </p>
+        </div>
       </div>
 
       {/* Información de Nobsa */}
@@ -50,7 +61,7 @@ export default function Carousel() {
         <InformacionNobsa />
       </div>
 
-      {/* TARJETAS SOBRE INFORMACION DE ESCUDOS DE NOBSA */}
+      {/* Tarjetas sobre información de escudos */}
       <div className="flex justify-center items-center w-full">
         <NobsaInfoSection />
       </div>
@@ -61,9 +72,6 @@ export default function Carousel() {
       </div>
 
       {/* Turismo */}
-      <div className="flex justify-center items-center w-full">
-        <Turismo />
-      </div>
     </div>
   );
 }

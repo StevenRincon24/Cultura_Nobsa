@@ -17,7 +17,7 @@ function IndexFiestas() {
   const years = [2024, 2025, 2026];
 
   return (
-    <div className="min-h-screen bg-gray-50 mt-25">
+    <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="bg-white rounded-xl shadow-lg p-6">
           <div className="flex items-center justify-between mb-8">
