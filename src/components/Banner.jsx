@@ -57,7 +57,7 @@ export default function Carousel() {
       </div>
 
       {/* Información de Nobsa */}
-      <div className="flex justify-center items-center py-8 w-full">
+      <div className="flex justify-center items-center w-full">
         <InformacionNobsa />
       </div>
 
