@@ -72,6 +72,9 @@ export default function Carousel() {
       </div>
 
       {/* Turismo */}
+      <div className="flex justify-center items-center w-full">
+        <Turismo />
+      </div>
     </div>
   );
 }
