@@ -3,6 +3,7 @@ import {
   loginRequest,
   registerRequest,
   validateTokenRequest,
+  logoutRequest,
 } from "@/api/auth";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
@@ -105,11 +106,15 @@ export const AuthProvider = ({ children }) => {
 
     checkLogin();
   }, []);
-  const logOut = (navigate) => {
-    Cookies.remove("token");
-    setUser(null);
-    setIsAuthenticated(false);
-    navigate("/");
+  const logOut = async (navigate) => {
+    try {
+      await logoutRequest(); // El backend elimina la cookie
+      setUser(null);
+      setIsAuthenticated(false);
+      navigate("/");
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
   };
 
   return (
