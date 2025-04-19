@@ -1,101 +1,58 @@
-import * as React from "react"
+import React from "react";
+import { motion } from "framer-motion";
 
-import { cn } from "@/lib/utils"
-
-function Card({
-  className,
-  ...props
-}) {
-  return (
-    <div
-      data-slot="card"
-      className={cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
-        className
-      )}
-      {...props} />
+const Card = ({ title, description, imageUrl, link, className = "" }) => {
+  const cardContent = (
+    <motion.div
+      className={`card h-full ${className}`}
+      whileHover={{ y: -8 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="relative h-48 overflow-hidden">
+        <img
+          src={imageUrl}
+          alt={title}
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+        />
+      </div>
+      <div className="p-6">
+        <h3 className="text-xl font-semibold font-heading mb-2">{title}</h3>
+        <p className="text-gray-600 text-sm mb-4">{description}</p>
+        {link && (
+          <a
+            href={link}
+            className="text-primary font-medium hover:text-secondary transition-colors inline-flex items-center"
+          >
+            Saber más
+            <svg
+              className="w-4 h-4 ml-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
+          </a>
+        )}
+      </div>
+    </motion.div>
   );
-}
 
-function CardHeader({
-  className,
-  ...props
-}) {
-  return (
-    <div
-      data-slot="card-header"
-      className={cn(
-        "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-[data-slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6",
-        className
-      )}
-      {...props} />
-  );
-}
+  if (link) {
+    return (
+      <a href={link} className="block h-full">
+        {cardContent}
+      </a>
+    );
+  }
 
-function CardTitle({
-  className,
-  ...props
-}) {
-  return (
-    <div
-      data-slot="card-title"
-      className={cn("leading-none font-semibold", className)}
-      {...props} />
-  );
-}
+  return cardContent;
+};
 
-function CardDescription({
-  className,
-  ...props
-}) {
-  return (
-    <div
-      data-slot="card-description"
-      className={cn("text-muted-foreground text-sm", className)}
-      {...props} />
-  );
-}
-
-function CardAction({
-  className,
-  ...props
-}) {
-  return (
-    <div
-      data-slot="card-action"
-      className={cn(
-        "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
-        className
-      )}
-      {...props} />
-  );
-}
-
-function CardContent({
-  className,
-  ...props
-}) {
-  return (<div data-slot="card-content" className={cn("px-6", className)} {...props} />);
-}
-
-function CardFooter({
-  className,
-  ...props
-}) {
-  return (
-    <div
-      data-slot="card-footer"
-      className={cn("flex items-center px-6 [.border-t]:pt-6", className)}
-      {...props} />
-  );
-}
-
-export {
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardAction,
-  CardDescription,
-  CardContent,
-}
+export default Card;

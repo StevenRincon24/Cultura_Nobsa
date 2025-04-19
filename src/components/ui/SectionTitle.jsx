@@ -4,13 +4,20 @@ const SectionTitle = ({ title, subtitle, light = false }) => {
   return (
     <div className="text-center mb-12">
       <h2
-        className={`text-3xl md:text-4xl font-bold mb-4 relative inline-block ${
+        className={`text-3xl md:text-4xl font-bold mb-4 ${
           light ? "text-white" : "text-gray-900"
         }`}
       >
         {title}
-        <span className="absolute left-0 bottom-0 w-full h-1 bg-red-600 transform -translate-y-2 opacity-75"></span>
       </h2>
+
+      {/* Línea decorativa */}
+      <div
+        className={`w-24 h-1 mt-2 mb-6 mx-auto ${
+          light ? "bg-white" : "bg-red-600"
+        }`}
+      ></div>
+
       {subtitle && (
         <p
           className={`max-w-3xl mx-auto text-lg ${

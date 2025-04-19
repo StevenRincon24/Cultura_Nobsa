@@ -3,12 +3,15 @@ import React, { useState } from "react";
 import { useHotel } from "@/context/HotelContext";
 import AgregarHotel from "./AgregarHotel"; // Asegúrate de importar el modal correctamente
 import { useAuth } from "@/context/AuthContext";
+import ConfirmModal from "./ConfirmarModal";
 
 export default function ListaHoteles() {
   const { hotels, deleteHotel, getHotel } = useHotel();
   const [showModal, setShowModal] = useState(false);
   const [hotelSeleccionado, setHotelSeleccionado] = useState(null);
   const { isAuthenticated } = useAuth();
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [hotelAEliminar, setHotelAEliminar] = useState(null);
 
   const handleEditarClick = (hotel) => {
     setHotelSeleccionado(hotel); // Guardar info del hotel seleccionado
@@ -51,7 +54,8 @@ export default function ListaHoteles() {
               <button
                 className="flex items-center gap-2 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700"
                 onClick={() => {
-                  deleteHotel(hotel._id);
+                  setHotelAEliminar(hotel);
+                  setShowConfirmModal(true);
                 }}
               >
                 <FaTrash />
@@ -69,6 +73,21 @@ export default function ListaHoteles() {
             setHotelSeleccionado(null);
           }}
           hotelData={hotelSeleccionado} // enviar info del hotel al modal
+        />
+      )}
+
+      {showConfirmModal && (
+        <ConfirmModal
+          message={`¿Deseas eliminar el hotel "${hotelAEliminar.name}"?`}
+          onClose={() => {
+            setShowConfirmModal(false);
+            setHotelAEliminar(null);
+          }}
+          onConfirm={() => {
+            deleteHotel(hotelAEliminar._id);
+            setShowConfirmModal(false);
+            setHotelAEliminar(null);
+          }}
         />
       )}
     </div>

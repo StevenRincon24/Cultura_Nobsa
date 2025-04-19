@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [isGastronomiaOpen, setIsGastronomiaOpen] = useState(false);
 
   const { isAuthenticated, logOut, user } = useAuth();
   const location = useLocation();
@@ -24,16 +25,31 @@ const Navbar = () => {
 
   const menuItems = [
     { label: "Inicio", icon: <FaHome />, link: "/" },
-    { label: "GASTRONOMÍA", icon: <FaUtensils />, link: "/gastronomia" },
+    {
+      label: "GASTRONOMÍA",
+      icon: <FaUtensils />,
+      submenu: [
+        {
+          label: "Platos típicos",
+          icon: <FaUtensils />,
+          link: "/gastronomia/platos-tipicos",
+        },
+        {
+          label: "Restaurantes",
+          icon: <FaHotel />,
+          link: "/gastronomia/restaurantes",
+        },
+      ],
+    },
     { label: "PATRIMONIO", icon: <FaLandmark />, link: "/patrimonio" },
     { label: "EVENTOS", icon: <FaCalendarAlt />, link: "/eventos" },
     { label: "HOSPEDAJE", icon: <FaHotel />, link: "/hoteles" },
   ];
 
-  // Cerrar menú al cambiar ruta
   useEffect(() => {
     setIsOpen(false);
     setUserMenuOpen(false);
+    setIsGastronomiaOpen(false);
   }, [location]);
 
   return (
@@ -61,18 +77,58 @@ const Navbar = () => {
         >
           <ul className="flex flex-col md:flex-row md:space-x-4 p-4 md:p-0">
             {menuItems.map((item, index) => (
-              <li key={index} className="w-full md:w-auto">
-                <Link
-                  to={item.link}
-                  className={`flex items-center gap-2 px-4 py-2 font-semibold rounded transition-all duration-300 ${
-                    location.pathname === item.link
-                      ? "text-blue-500"
-                      : "text-gray-900"
-                  } hover:bg-gray-200`}
-                >
-                  {item.icon}
-                  {item.label}
-                </Link>
+              <li
+                key={index}
+                className="relative w-full md:w-auto"
+                onMouseEnter={() => item.submenu && setIsGastronomiaOpen(true)}
+                onMouseLeave={() => item.submenu && setIsGastronomiaOpen(false)}
+              >
+                {item.submenu ? (
+                  <>
+                    <button
+                      className={`flex items-center gap-2 px-4 py-2 font-semibold rounded transition-all duration-300 w-full ${
+                        location.pathname.includes("/gastronomia")
+                          ? "text-blue-500"
+                          : "text-gray-900"
+                      } hover:bg-gray-200`}
+                    >
+                      {item.icon}
+                      {item.label}
+                      <FaChevronDown
+                        className={`ml-1 transform transition-transform duration-200 ${
+                          isGastronomiaOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                    {isGastronomiaOpen && (
+                      <ul className="absolute md:absolute bg-white border border-gray-200 rounded shadow-md mt-2 w-48 z-50">
+                        {item.submenu.map((sub, idx) => (
+                          <li key={idx}>
+                            <Link
+                              to={sub.link}
+                              className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
+                            >
+                              {sub.icon}
+                              {sub.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    to={item.link}
+                    className={`flex items-center gap-2 px-4 py-2 font-semibold rounded transition-all duration-300 ${
+                      location.pathname === item.link
+                        ? "text-blue-500"
+                        : "text-gray-900"
+                    } hover:bg-gray-200`}
+                  >
+                    {item.icon}
+                    {item.label}
+                  </Link>
+                )}
               </li>
             ))}
 
@@ -80,7 +136,7 @@ const Navbar = () => {
               <li className="relative">
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="flex items-center gap-2 px-4 py-2 font-semibold rounded bg-blue-500 text-white  transition-all"
+                  className="flex items-center gap-2 px-4 py-2 font-semibold rounded bg-blue-500 text-white transition-all"
                 >
                   {user.username}
                   <FaChevronDown

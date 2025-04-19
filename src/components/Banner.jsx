@@ -3,6 +3,7 @@ import NobsaInfoSection from "./Index/NobsaInfoSection";
 import InformacionNobsa from "./Index/InformacionNobsa";
 import DescrubreNobsa from "./Index/DescubreNobsa";
 import Turismo from "./Index/AtractivosTuristicos";
+import PlaneaViaje from "./Index/PlaneaViaje";
 
 const images = [
   "https://i.postimg.cc/prJqP7Px/iglesia.jpg",
@@ -72,9 +73,11 @@ export default function Carousel() {
       </div>
 
       {/* Turismo */}
-      <div className="flex justify-center items-center w-full">
+      {/*<div className="flex justify-center items-center w-full">
         <Turismo />
       </div>
+*/}
+      <PlaneaViaje />
     </div>
   );
 }

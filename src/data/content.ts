@@ -8,7 +8,7 @@ export const heroContent = {
 
 
 export const aboutContent = {
-  title: "Sobre Nobsa",
+  title: "Nobsa, Boyacá",
   subtitle: "Conoce más sobre nuestro municipio",
   description: "Nobsa es un municipio colombiano ubicado en el departamento de Boyacá, reconocido por su rica tradición artesanal, especialmente en la elaboración de ruanas y tejidos en lana virgen. Con una población de aproximadamente 16,000 habitantes, el municipio combina su herencia cultural con el desarrollo industrial.",
   stats: [
