@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Hero from "@/section/Hero";
 import SectionTitle from "../ui/SectionTitle";
-import Card from "../ui/Card";
 import { typicalDishes } from "@/data/typicalDishes";
 import { restaurants } from "@/data/restaurants";
 import { motion } from "framer-motion";
+import { Card } from "../Card";
 
 const GastronomyPage = () => {
   const featuredDishes = typicalDishes.slice(0, 3);
