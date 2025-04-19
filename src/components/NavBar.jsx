@@ -9,6 +9,9 @@ import {
   FaHotel,
   FaHome,
   FaChevronDown,
+  FaMapMarkedAlt,
+  FaPlane,
+  FaRoute,
 } from "react-icons/fa";
 import { RiLoginCircleLine, RiLogoutCircleLine } from "react-icons/ri";
 import { useAuth } from "@/context/AuthContext";
@@ -18,6 +21,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [isGastronomiaOpen, setIsGastronomiaOpen] = useState(false);
+  const [isTurismoOpen, setIsTurismoOpen] = useState(false);
 
   const { isAuthenticated, logOut, user } = useAuth();
   const location = useLocation();
@@ -28,6 +32,7 @@ const Navbar = () => {
     {
       label: "GASTRONOMÍA",
       icon: <FaUtensils />,
+      link: "/gastronomia",
       submenu: [
         {
           label: "Platos típicos",
@@ -43,13 +48,35 @@ const Navbar = () => {
     },
     { label: "PATRIMONIO", icon: <FaLandmark />, link: "/patrimonio" },
     { label: "EVENTOS", icon: <FaCalendarAlt />, link: "/eventos" },
-    { label: "HOSPEDAJE", icon: <FaHotel />, link: "/hoteles" },
+    {
+      label: "TURISMO",
+      icon: <FaPlane />,
+      link: "/turismo",
+      submenu: [
+        {
+          label: "Hoteles",
+          icon: <FaHotel />,
+          link: "/hoteles",
+        },
+        {
+          label: "Atractivos turísticos",
+          icon: <FaMapMarkedAlt />,
+          link: "/turismo/atractivos",
+        },
+        {
+          label: "¿Cómo llegar?",
+          icon: <FaRoute />,
+          link: "/como-llegar",
+        },
+      ],
+    },
   ];
 
   useEffect(() => {
     setIsOpen(false);
     setUserMenuOpen(false);
     setIsGastronomiaOpen(false);
+    setIsTurismoOpen(false);
   }, [location]);
 
   return (
@@ -76,61 +103,86 @@ const Navbar = () => {
           }`}
         >
           <ul className="flex flex-col md:flex-row md:space-x-4 p-4 md:p-0">
-            {menuItems.map((item, index) => (
-              <li
-                key={index}
-                className="relative w-full md:w-auto"
-                onMouseEnter={() => item.submenu && setIsGastronomiaOpen(true)}
-                onMouseLeave={() => item.submenu && setIsGastronomiaOpen(false)}
-              >
-                {item.submenu ? (
-                  <>
-                    <button
-                      className={`flex items-center gap-2 px-4 py-2 font-semibold rounded transition-all duration-300 w-full ${
-                        location.pathname.includes("/gastronomia")
+            {menuItems.map((item, index) => {
+              const hasSubmenu = item.submenu;
+
+              return (
+                <li
+                  key={index}
+                  className="relative w-full md:w-auto"
+                  onMouseEnter={() =>
+                    item.label === "GASTRONOMÍA"
+                      ? setIsGastronomiaOpen(true)
+                      : item.label === "TURISMO"
+                      ? setIsTurismoOpen(true)
+                      : null
+                  }
+                  onMouseLeave={() =>
+                    item.label === "GASTRONOMÍA"
+                      ? setIsGastronomiaOpen(false)
+                      : item.label === "TURISMO"
+                      ? setIsTurismoOpen(false)
+                      : null
+                  }
+                >
+                  {hasSubmenu ? (
+                    <>
+                      <Link
+                        to={item.link}
+                        onClick={() => setIsOpen(false)}
+                        className={`flex items-center gap-2 px-4 py-2 font-semibold rounded transition-all duration-300 w-full ${
+                          location.pathname.includes(item.link)
+                            ? "text-blue-500"
+                            : "text-gray-900"
+                        } hover:bg-gray-200`}
+                      >
+                        {item.icon}
+                        {item.label}
+                        <FaChevronDown
+                          className={`ml-1 transform transition-transform duration-200 ${
+                            (item.label === "GASTRONOMÍA" &&
+                              isGastronomiaOpen) ||
+                            (item.label === "TURISMO" && isTurismoOpen)
+                              ? "rotate-180"
+                              : ""
+                          }`}
+                        />
+                      </Link>
+                      {(item.label === "GASTRONOMÍA" && isGastronomiaOpen) ||
+                      (item.label === "TURISMO" && isTurismoOpen) ? (
+                        <ul className="absolute bg-white border border-gray-200 rounded shadow-md mt-2 w-56 z-50">
+                          {item.submenu.map((sub, idx) => (
+                            <li key={idx}>
+                              <Link
+                                to={sub.link}
+                                className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
+                                onClick={() => setIsOpen(false)}
+                              >
+                                {sub.icon}
+                                {sub.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </>
+                  ) : (
+                    <Link
+                      to={item.link}
+                      onClick={() => setIsOpen(false)}
+                      className={`flex items-center gap-2 px-4 py-2 font-semibold rounded transition-all duration-300 ${
+                        location.pathname === item.link
                           ? "text-blue-500"
                           : "text-gray-900"
                       } hover:bg-gray-200`}
                     >
                       {item.icon}
                       {item.label}
-                      <FaChevronDown
-                        className={`ml-1 transform transition-transform duration-200 ${
-                          isGastronomiaOpen ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-                    {isGastronomiaOpen && (
-                      <ul className="absolute md:absolute bg-white border border-gray-200 rounded shadow-md mt-2 w-48 z-50">
-                        {item.submenu.map((sub, idx) => (
-                          <li key={idx}>
-                            <Link
-                              to={sub.link}
-                              className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
-                            >
-                              {sub.icon}
-                              {sub.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </>
-                ) : (
-                  <Link
-                    to={item.link}
-                    className={`flex items-center gap-2 px-4 py-2 font-semibold rounded transition-all duration-300 ${
-                      location.pathname === item.link
-                        ? "text-blue-500"
-                        : "text-gray-900"
-                    } hover:bg-gray-200`}
-                  >
-                    {item.icon}
-                    {item.label}
-                  </Link>
-                )}
-              </li>
-            ))}
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
 
             {isAuthenticated ? (
               <li className="relative">
@@ -151,12 +203,14 @@ const Navbar = () => {
                     <Link
                       to="/perfil"
                       className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={() => setUserMenuOpen(false)}
                     >
                       Perfil
                     </Link>
                     <Link
                       to="/registro"
                       className="block px-4 py-2 hover:bg-gray-100"
+                      onClick={() => setUserMenuOpen(false)}
                     >
                       Crear usuario
                     </Link>
@@ -179,6 +233,7 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/login"
+                  onClick={() => setIsOpen(false)}
                   className="flex items-center gap-2 px-4 py-2 font-semibold rounded bg-blue-500 text-white hover:bg-blue-700 transition-all"
                 >
                   <RiLoginCircleLine />

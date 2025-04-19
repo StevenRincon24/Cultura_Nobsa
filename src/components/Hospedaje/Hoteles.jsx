@@ -7,6 +7,10 @@ import AgregarHotel from "./AgregarHotel";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SectionTitle from "../ui/SectionTitle";
+import { accommodations } from "@/data/hotels";
+import { motion } from "framer-motion";
+import DirectionsSection from "../Turismo/DireccionNobsa";
 
 export default function Hoteles() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -19,20 +23,12 @@ export default function Hoteles() {
   }, []);
 
   return (
-    <div className="mt-10 p-6 transition-colors text-white min-h-screen">
+    <div className="mt-10 transition-colors text-white min-h-screen">
       <div className="text-center mb-12">
-        <BedDouble className="mx-auto h-12 w-12 text-emerald-600 dark:text-emerald-400" />
-        <h1 className="mt-4 text-4xl font-bold text-gray-900 ">
-          Alojamientos y Lugares Especiales
-        </h1>
-        <p className="mt-2 text-lg text-gray-800 ">
-          Descubre lugares únicos rodeados de paisajes impresionantes. <br />
-          Recárgate de energía, disfruta el confort y la tranquilidad que
-          mereces. <br />
-          <span className="font-semibold">
-            "Tú descanso es nuestra prioridad".
-          </span>{" "}
-        </p>
+        <SectionTitle
+          title="Dónde puedes hospedarte"
+          subtitle="Opciones de alojamiento para hacer tu estancia más confortable"
+        />
       </div>
 
       <div className="text-center mt-6">
@@ -49,6 +45,8 @@ export default function Hoteles() {
       {modalOpen && (
         <AgregarHotel className="mt-50" onClose={() => setModalOpen(false)} />
       )}
+      
+<div className="mt-10"></div>
       <ToastContainer />
     </div>
   );

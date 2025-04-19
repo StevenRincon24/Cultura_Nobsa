@@ -16,6 +16,11 @@ import Login from "./components/Login/Login";
 import RutasProtegidas from "./components/RutasProtegidas";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PlatosTipicos from "./components/Gastronomia/PlatosTipicos";
+import RestaurantsPage from "./components/Gastronomia/Restaurantes";
+import PatrimonioPage from "./components/Patrimonio/Patrimonio";
+import TourismPage from "./components/Turismo/Turismo";
+import DirectionsSection from "./components/Turismo/DireccionNobsa";
 // Hook personalizado para detectar si la pantalla es móvil
 function useMediaQuery(query) {
   const [matches, setMatches] = useState(false);
@@ -54,6 +59,18 @@ function App() {
                   <Route path="/registro" element={<RegisterPage />} />
                 </Route>
                 <Route path="/gastronomia" element={<RutaGastronomica />} />
+                <Route
+                  path="/gastronomia/platos-tipicos"
+                  element={<PlatosTipicos />}
+                />
+                <Route
+                  path="/gastronomia/restaurantes"
+                  element={<RestaurantsPage />}
+                />
+                <Route path="/patrimonio" element={<PatrimonioPage />} />
+                <Route path="/turismo" element={<TourismPage />} />
+                <Route path="/como-llegar" element={<DirectionsSection />} />
+
                 <Route
                   path="/eventos"
                   element={isMobile ? <EventosNobsa /> : <IndexFiestas />} // Cambia según el dispositivo

@@ -16,6 +16,9 @@ const Hero = ({
       className={`hero-section relative min-h-[70vh] flex items-center ${className}`}
       style={{
         backgroundImage: `url(${imageUrl})`,
+        backgroundPosition: "center", // Centra la imagen
+        backgroundSize: "cover", // Cubre toda el área manteniendo proporción
+        backgroundRepeat: "no-repeat", // No se repite
       }}
     >
       {overlay && <div className="absolute inset-0 bg-black opacity-50"></div>}
