@@ -5,7 +5,7 @@ import SectionTitle from "../ui/SectionTitle";
 import { typicalDishes } from "@/data/typicalDishes";
 import { restaurants } from "@/data/restaurants";
 import { motion } from "framer-motion";
-import { Card } from "../ui/Card2";
+import  Card  from "../ui/Card2";
 
 const GastronomyPage = () => {
   const featuredDishes = typicalDishes.slice(0, 3);
