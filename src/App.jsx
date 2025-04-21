@@ -21,6 +21,9 @@ import RestaurantsPage from "./components/Gastronomia/Restaurantes";
 import PatrimonioPage from "./components/Patrimonio/Patrimonio";
 import TourismPage from "./components/Turismo/Turismo";
 import DirectionsSection from "./components/Turismo/DireccionNobsa";
+import TripPlanner from "./components/Turismo/ComoLlegar";
+import Gastronomy from "./components/Gastronomia/RutasGastronomicas";
+import Events from "./components/Fiestas/EventosNobsa";
 // Hook personalizado para detectar si la pantalla es móvil
 function useMediaQuery(query) {
   const [matches, setMatches] = useState(false);
@@ -67,13 +70,20 @@ function App() {
                   path="/gastronomia/restaurantes"
                   element={<RestaurantsPage />}
                 />
+
+                <Route
+                  path="/gastronomia/rutas-gastronomicas"
+                  element={<Gastronomy />}
+                />
+
                 <Route path="/patrimonio" element={<PatrimonioPage />} />
                 <Route path="/turismo" element={<TourismPage />} />
-                <Route path="/como-llegar" element={<DirectionsSection />} />
+                <Route path="/como-llegar" element={<TripPlanner />} />
 
                 <Route
                   path="/eventos"
-                  element={isMobile ? <EventosNobsa /> : <IndexFiestas />} // Cambia según el dispositivo
+                  element={<Events />}
+                  //element={isMobile ? <EventosNobsa /> : <IndexFiestas />} // Cambia según el dispositivo
                 />
                 <Route path="/hoteles" element={<Hoteles />} />
               </Routes>

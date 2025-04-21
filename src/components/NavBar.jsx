@@ -44,6 +44,11 @@ const Navbar = () => {
           icon: <FaHotel />,
           link: "/gastronomia/restaurantes",
         },
+        {
+          label: "Rutas gastronomicas",
+          icon: <FaRoute />,
+          link: "/gastronomia/rutas-gastronomicas",
+        },
       ],
     },
     { label: "PATRIMONIO", icon: <FaLandmark />, link: "/patrimonio" },
