@@ -1,7 +1,12 @@
+import { useAuth } from "@/context/AuthContext";
 import { FaFacebook, FaTwitter, FaYoutube } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+
+  const { isAuthenticated } = useAuth();
+  console.log(isAuthenticated, "AUTENTICADO");
+
   return (
     <footer className="bg-[#1E3A8A] text-white py-8 px-4">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 text-center">
@@ -13,12 +18,14 @@ const Footer = () => {
             <FaTwitter className="text-2xl cursor-pointer hover:text-blue-400 transition duration-300" />
             <FaYoutube className="text-2xl cursor-pointer hover:text-red-500 transition duration-300" />
           </div>
-          <Link
-            className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg font-bold hover:bg-red-600 transition duration-300"
-            to="/login"
-          >
-            USUARIO ADMINISTRADOR
-          </Link>
+          {!isAuthenticated && (
+            <Link
+              className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg font-bold hover:bg-red-600 transition duration-300"
+              to="/login"
+            >
+              USUARIO ADMINISTRADOR
+            </Link>
+          )}
         </div>
 
         {/* Sección Derecha */}
