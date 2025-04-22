@@ -4,6 +4,7 @@ import InformacionNobsa from "./Index/InformacionNobsa";
 import DescrubreNobsa from "./Index/DescubreNobsa";
 import Turismo from "./Index/AtractivosTuristicos";
 import PlaneaViaje from "./Index/PlaneaViaje";
+import EventBanner from "./Index/BannerEventos";
 
 const images = [
   "https://i.postimg.cc/prJqP7Px/iglesia.jpg",
@@ -62,6 +63,10 @@ export default function Carousel() {
         <InformacionNobsa />
       </div>
 
+      <div className="flex justify-center items-center w-full">
+        <EventBanner />
+      </div>
+
       {/* Tarjetas sobre información de escudos */}
       <div className="flex justify-center items-center w-full">
         <NobsaInfoSection />
@@ -77,6 +82,7 @@ export default function Carousel() {
         <Turismo />
       </div>
 */}
+
       <PlaneaViaje />
     </div>
   );

@@ -3,7 +3,7 @@ import { Attraction, CulinaryRoute, Event, Restaurant } from "../types";
 export const upcomingEvents: Event[] = [
   {
     id: 1,
-    title: "Festival de la Ruana y el Pañolón",
+    title: "Festival de la Ruana ",
     date: "15 de Julio, 2025",
     description: "El festival más importante de Nobsa, celebrando su tradicional artesanía textil con desfiles, música y gastronomía local.",
     imageUrl: "https://images.pexels.com/photos/6177607/pexels-photo-6177607.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
