@@ -5,9 +5,9 @@ export default function ChatBotButton() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex items-end gap-4">
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col-reverse md:flex-row items-end gap-4">
       {open && (
-        <div className="bg-blue-200 p-2 rounded-lg shadow-lg w-[350px] h-[430px]">
+        <div className="bg-blue-200 p-2 rounded-lg shadow-lg w-[90vw] max-w-[350px] h-[430px] md:w-[350px]">
           <iframe
             src="https://www.chatbase.co/chatbot-iframe/WMJtVA5KCLEv7LpJZQ9yo"
             width="100%"
