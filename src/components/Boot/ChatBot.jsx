@@ -16,13 +16,12 @@ export default function ChatBotButton() {
       {open && (
         <div className="absolute bottom-16 right-0 bg-white p-2 rounded-lg shadow-lg w-[350px] h-[430px]">
           <iframe
-            title="Chatbot de cultura"
-            allow="microphone;"
+            src="https://www.chatbase.co/chatbot-iframe/WMJtVA5KCLEv7LpJZQ9yo"
             width="100%"
             height="100%"
-            src="https://console.dialogflow.com/api-client/demo/embedded/b1efeb57-25d1-4cd9-a36d-95631292d3ca"
-            className="rounded-lg"
-          ></iframe>
+            style={{ border: "none", borderRadius: "0.5rem" }}
+            title="Chatbot de Nobsa"
+          />
         </div>
       )}
     </div>
