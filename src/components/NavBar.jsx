@@ -83,7 +83,6 @@ const Navbar = () => {
 
   const handleMouseEnter = (label) => {
     if (window.innerWidth >= 768) {
-      // Solo abre submenu con hover en desktop
       setOpenSubmenu(label);
     }
   };
@@ -96,7 +95,6 @@ const Navbar = () => {
 
   const handleSubmenuClick = (label) => {
     if (window.innerWidth < 768) {
-      // Toggle en mobile
       setOpenSubmenu(openSubmenu === label ? null : label);
     }
   };
@@ -105,28 +103,28 @@ const Navbar = () => {
     <nav
       className={`fixed w-full top-0 left-0 z-50 transition-colors duration-300 ${
         isScrolled
-          ? "bg-white text-gray-900 shadow-md"
-          : "bg-transparent text-white"
+          ? "bg-white shadow-md text-gray-900"
+          : "bg-white md:bg-transparent md:text-white md:shadow-none text-gray-900"
       }`}
     >
-      <div className="flex justify-between items-center px-4 py-3 md:px-8">
-        {/* Logo y botón menú mobile */}
-        <div className="flex items-center space-x-4">
-          <Link to="/">
-            <img
-              src="https://i.postimg.cc/fbMZCBs1/logo-alcaldia-horizontal-nuevo.png"
-              alt="Logo"
-              className="h-16 md:h-20 object-contain"
-            />
-          </Link>
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="text-2xl md:hidden focus:outline-none"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <FaTimes /> : <FaBars />}
-          </button>
-        </div>
+      <div className="relative flex justify-between items-center px-4 py-3 md:px-8">
+        {/* Logo */}
+        <Link to="/">
+          <img
+            src="https://i.postimg.cc/fbMZCBs1/logo-alcaldia-horizontal-nuevo.png"
+            alt="Logo"
+            className="h-16 md:h-20 object-contain"
+          />
+        </Link>
+
+        {/* Botón hamburguesa */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="absolute right-4 top-5 md:hidden text-2xl focus:outline-none"
+          aria-label="Toggle menu"
+        >
+          {isOpen ? <FaTimes /> : <FaBars />}
+        </button>
 
         {/* Menú principal */}
         <div
@@ -152,12 +150,8 @@ const Navbar = () => {
                     onClick={() => handleSubmenuClick(item.label)}
                     className={`flex justify-between items-center gap-2 cursor-pointer px-4 py-2 rounded-md transition-all ${
                       isActive
-                        ? isScrolled
-                          ? "text-blue-600 font-bold"
-                          : "text-blue-300 font-bold"
-                        : isScrolled
-                        ? "text-gray-900"
-                        : "text-white"
+                        ? "text-blue-600 font-bold"
+                        : "text-gray-900 md:text-white md:hover:text-blue-300"
                     } hover:bg-gray-100 md:hover:bg-transparent`}
                   >
                     <div className="flex items-center gap-2">
