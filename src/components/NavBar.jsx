@@ -27,7 +27,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const menuItems = [
-    { label: "Inicio", icon: <FaHome />, link: "/" },
+    { label: "INICIO", icon: <FaHome />, link: "/" },
     {
       label: "GASTRONOMÍA",
       icon: <FaUtensils />,
@@ -82,15 +82,11 @@ const Navbar = () => {
   }, [location]);
 
   const handleMouseEnter = (label) => {
-    if (window.innerWidth >= 768) {
-      setOpenSubmenu(label);
-    }
+    if (window.innerWidth >= 768) setOpenSubmenu(label);
   };
 
   const handleMouseLeave = () => {
-    if (window.innerWidth >= 768) {
-      setOpenSubmenu(null);
-    }
+    if (window.innerWidth >= 768) setOpenSubmenu(null);
   };
 
   const handleSubmenuClick = (label) => {
@@ -99,12 +95,17 @@ const Navbar = () => {
     }
   };
 
+  const textColor = isScrolled ? "text-gray-900" : "text-white";
+  const hoverTextColor = isScrolled
+    ? "hover:text-blue-600"
+    : "hover:text-blue-300";
+
   return (
     <nav
       className={`fixed w-full top-0 left-0 z-50 transition-colors duration-300 ${
         isScrolled
-          ? "bg-white shadow-md text-gray-900"
-          : "bg-white md:bg-transparent md:text-white md:shadow-none text-gray-900"
+          ? "bg-white shadow-md"
+          : "bg-white md:bg-transparent md:shadow-none"
       }`}
     >
       <div className="relative flex justify-between items-center px-4 py-3 md:px-8">
@@ -150,7 +151,7 @@ const Navbar = () => {
                     className={`flex justify-between items-center gap-2 cursor-pointer px-4 py-2 rounded-md transition-all ${
                       isActive
                         ? "text-blue-600 font-bold"
-                        : "text-gray-900 md:text-white md:hover:text-blue-300"
+                        : `${textColor} ${hoverTextColor}`
                     } hover:bg-gray-100 md:hover:bg-transparent`}
                   >
                     <Link
@@ -158,10 +159,8 @@ const Navbar = () => {
                       className="flex items-center gap-2"
                       onClick={() => {
                         if (window.innerWidth < 768 && hasSubmenu) {
-                          // Si es mobile y tiene submenu, primero abre el submenu en vez de navegar inmediatamente
                           handleSubmenuClick(item.label);
                         } else {
-                          // Si no, sigue el link normal
                           setIsOpen(false);
                         }
                       }}
