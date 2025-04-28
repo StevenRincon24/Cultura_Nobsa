@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   FaBars,
   FaTimes,
@@ -15,13 +15,11 @@ import {
 } from "react-icons/fa";
 import { RiLoginCircleLine, RiLogoutCircleLine } from "react-icons/ri";
 import { useAuth } from "@/context/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [isGastronomiaOpen, setIsGastronomiaOpen] = useState(false);
-  const [isTurismoOpen, setIsTurismoOpen] = useState(false);
+  const [openSubmenu, setOpenSubmenu] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
   const { isAuthenticated, logOut, user } = useAuth();
@@ -46,7 +44,7 @@ const Navbar = () => {
           link: "/gastronomia/restaurantes",
         },
         {
-          label: "Rutas gastronomicas",
+          label: "Rutas gastronómicas",
           icon: <FaRoute />,
           link: "/gastronomia/rutas-gastronomicas",
         },
@@ -59,42 +57,36 @@ const Navbar = () => {
       icon: <FaPlane />,
       link: "/turismo",
       submenu: [
-        {
-          label: "Hoteles",
-          icon: <FaHotel />,
-          link: "/hoteles",
-        },
+        { label: "Hoteles", icon: <FaHotel />, link: "/hoteles" },
         {
           label: "Atractivos turísticos",
           icon: <FaMapMarkedAlt />,
           link: "/turismo/atractivos",
         },
-        {
-          label: "¿Cómo llegar?",
-          icon: <FaRoute />,
-          link: "/como-llegar",
-        },
+        { label: "¿Cómo llegar?", icon: <FaRoute />, link: "/como-llegar" },
       ],
     },
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     setIsOpen(false);
     setUserMenuOpen(false);
-    setIsGastronomiaOpen(false);
-    setIsTurismoOpen(false);
+    setOpenSubmenu(null);
   }, [location]);
+
+  const handleMouseEnter = (label) => {
+    setOpenSubmenu(label);
+  };
+
+  const handleMouseLeave = () => {
+    setOpenSubmenu(null);
+  };
 
   return (
     <nav
@@ -105,6 +97,7 @@ const Navbar = () => {
       }`}
     >
       <div className="flex justify-between items-center p-4 md:px-8">
+        {/* Logo */}
         <div className="flex items-center space-x-4">
           <img
             src="https://i.postimg.cc/fbMZCBs1/logo-alcaldia-horizontal-nuevo.png"
@@ -120,103 +113,70 @@ const Navbar = () => {
           </button>
         </div>
 
+        {/* Menu */}
         <div
           className={`md:flex md:items-center md:ml-auto transition-all duration-300 ${
             isOpen ? "block" : "hidden"
           }`}
         >
-          <ul className="flex flex-col md:flex-row md:space-x-4 p-4 md:p-0">
+          <ul className="flex flex-col md:flex-row md:space-x-4 p-4 md:p-0 " >
             {menuItems.map((item, index) => {
-              const hasSubmenu = item.submenu;
+              const hasSubmenu = !!item.submenu;
+              const isActive = location.pathname.includes(item.link);
 
               return (
                 <li
                   key={index}
                   className="relative w-full md:w-auto"
-                  onMouseEnter={() =>
-                    item.label === "GASTRONOMÍA"
-                      ? setIsGastronomiaOpen(true)
-                      : item.label === "TURISMO"
-                      ? setIsTurismoOpen(true)
-                      : null
-                  }
-                  onMouseLeave={() =>
-                    item.label === "GASTRONOMÍA"
-                      ? setIsGastronomiaOpen(false)
-                      : item.label === "TURISMO"
-                      ? setIsTurismoOpen(false)
-                      : null
-                  }
+                  onMouseEnter={() => handleMouseEnter(item.label)}
+                  onMouseLeave={handleMouseLeave}
                 >
-                  {hasSubmenu ? (
-                    <>
-                      <Link
-                        to={item.link}
-                        onClick={() => setIsOpen(false)}
-                        className={`flex items-center gap-2 px-4 py-2 font-semibold rounded transition-all duration-300 w-full ${
-                          location.pathname.includes(item.link)
-                            ? isScrolled
-                              ? "text-blue-500"
-                              : "text-blue-300"
-                            : isScrolled
-                            ? "text-gray-900"
-                            : "text-white"
-                        } hover:${isScrolled ? "bg-gray-200" : "bg-white/10"}`}
-                      >
-                        {item.icon}
-                        {item.label}
-                        <FaChevronDown
-                          className={`ml-1 transform transition-transform duration-200 ${
-                            (item.label === "GASTRONOMÍA" &&
-                              isGastronomiaOpen) ||
-                            (item.label === "TURISMO" && isTurismoOpen)
-                              ? "rotate-180"
-                              : ""
-                          }`}
-                        />
-                      </Link>
-                      {(item.label === "GASTRONOMÍA" && isGastronomiaOpen) ||
-                      (item.label === "TURISMO" && isTurismoOpen) ? (
-                        <ul className="absolute bg-white text-gray-900 border border-gray-200 rounded shadow-md mt-2 w-56 z-50">
-                          {item.submenu.map((sub, idx) => (
-                            <li key={idx}>
-                              <Link
-                                to={sub.link}
-                                className={`flex items-center gap-2 px-4 py-2 hover:${
-                                  isScrolled ? "bg-gray-100" : "bg-white/10"
-                                }`}
-                                onClick={() => setIsOpen(false)}
-                              >
-                                {sub.icon}
-                                {sub.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      ) : null}
-                    </>
-                  ) : (
-                    <Link
-                      to={item.link}
-                      onClick={() => setIsOpen(false)}
-                      className={`flex items-center gap-2 px-4 py-2 font-semibold rounded transition-all duration-300 ${
-                        location.pathname === item.link
-                          ? isScrolled
-                            ? "text-blue-500"
-                            : "text-blue-300"
-                          : isScrolled
-                          ? "text-gray-900"
-                          : "text-white"
-                      } hover:${isScrolled ? "bg-gray-200" : "bg-white/10"}`}
-                    >
-                      {item.icon}
-                      {item.label}
-                    </Link>
+                  <Link
+                    to={item.link}
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center gap-2 px-4 py-2 font-semibold rounded transition-all duration-300 w-full ${
+                      isActive
+                        ? isScrolled
+                          ? "text-blue-500"
+                          : "text-blue-300"
+                        : isScrolled
+                        ? "text-gray-900"
+                        : "text-white"
+                    } hover:${isScrolled ? "bg-gray-200" : "bg-white/10"}`}
+                  >
+                    {item.icon}
+                    {item.label}
+                    {hasSubmenu && (
+                      <FaChevronDown
+                        className={`ml-1 transform transition-transform duration-200 ${
+                          openSubmenu === item.label ? "rotate-180" : ""
+                        }`}
+                      />
+                    )}
+                  </Link>
+
+                  {/* Submenu */}
+                  {hasSubmenu && openSubmenu === item.label && (
+                    <ul className="absolute bg-white text-gray-900 border border-gray-200 rounded shadow-md mt-0.5 w-56 z-50">
+                      {item.submenu.map((sub, idx) => (
+                        <li key={idx}>
+                          <Link
+                            to={sub.link}
+                            className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            {sub.icon}
+                            {sub.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
                   )}
                 </li>
               );
             })}
 
+            {/* Usuario */}
             {isAuthenticated ? (
               <li className="relative">
                 <button
