@@ -53,7 +53,7 @@ function App() {
           <div className="app-container">
             <NavBar className="navbar" />{" "}
             {/* Asegúrate de que la clase sea correcta */}
-            <div className="main-content">
+            <div >
               <Routes>
                 <Route path="/" element={<Banner />} />
                 <Route path="/login" element={<Login />} />

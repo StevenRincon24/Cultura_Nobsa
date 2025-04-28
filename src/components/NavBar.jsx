@@ -22,6 +22,7 @@ const Navbar = () => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [isGastronomiaOpen, setIsGastronomiaOpen] = useState(false);
   const [isTurismoOpen, setIsTurismoOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const { isAuthenticated, logOut, user } = useAuth();
   const location = useLocation();
@@ -78,6 +79,17 @@ const Navbar = () => {
   ];
 
   useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
     setIsOpen(false);
     setUserMenuOpen(false);
     setIsGastronomiaOpen(false);
@@ -85,7 +97,13 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <nav className="shadow-md bg-white w-full fixed top-0 left-0 z-50">
+    <nav
+      className={`w-full fixed top-0 left-0 z-50 transition-colors duration-300 ${
+        isScrolled
+          ? "bg-white text-gray-900 shadow-md"
+          : "bg-transparent text-white"
+      }`}
+    >
       <div className="flex justify-between items-center p-4 md:px-8">
         <div className="flex items-center space-x-4">
           <img
@@ -103,7 +121,7 @@ const Navbar = () => {
         </div>
 
         <div
-          className={`md:flex md:items-center md:ml-auto bg-white md:static absolute top-16 right-0 w-full md:w-auto transition-all duration-300 ${
+          className={`md:flex md:items-center md:ml-auto transition-all duration-300 ${
             isOpen ? "block" : "hidden"
           }`}
         >
@@ -137,9 +155,13 @@ const Navbar = () => {
                         onClick={() => setIsOpen(false)}
                         className={`flex items-center gap-2 px-4 py-2 font-semibold rounded transition-all duration-300 w-full ${
                           location.pathname.includes(item.link)
-                            ? "text-blue-500"
-                            : "text-gray-900"
-                        } hover:bg-gray-200`}
+                            ? isScrolled
+                              ? "text-blue-500"
+                              : "text-blue-300"
+                            : isScrolled
+                            ? "text-gray-900"
+                            : "text-white"
+                        } hover:${isScrolled ? "bg-gray-200" : "bg-white/10"}`}
                       >
                         {item.icon}
                         {item.label}
@@ -155,12 +177,14 @@ const Navbar = () => {
                       </Link>
                       {(item.label === "GASTRONOMÍA" && isGastronomiaOpen) ||
                       (item.label === "TURISMO" && isTurismoOpen) ? (
-                        <ul className="absolute bg-white border border-gray-200 rounded shadow-md mt-2 w-56 z-50">
+                        <ul className="absolute bg-white text-gray-900 border border-gray-200 rounded shadow-md mt-2 w-56 z-50">
                           {item.submenu.map((sub, idx) => (
                             <li key={idx}>
                               <Link
                                 to={sub.link}
-                                className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
+                                className={`flex items-center gap-2 px-4 py-2 hover:${
+                                  isScrolled ? "bg-gray-100" : "bg-white/10"
+                                }`}
                                 onClick={() => setIsOpen(false)}
                               >
                                 {sub.icon}
@@ -177,9 +201,13 @@ const Navbar = () => {
                       onClick={() => setIsOpen(false)}
                       className={`flex items-center gap-2 px-4 py-2 font-semibold rounded transition-all duration-300 ${
                         location.pathname === item.link
-                          ? "text-blue-500"
-                          : "text-gray-900"
-                      } hover:bg-gray-200`}
+                          ? isScrolled
+                            ? "text-blue-500"
+                            : "text-blue-300"
+                          : isScrolled
+                          ? "text-gray-900"
+                          : "text-white"
+                      } hover:${isScrolled ? "bg-gray-200" : "bg-white/10"}`}
                     >
                       {item.icon}
                       {item.label}
