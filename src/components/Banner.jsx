@@ -49,12 +49,12 @@ export default function Carousel() {
             Bienvenidos a Nobsa
           </h1>
 
-          {/* Este h2 solo visible en sm hacia arriba */}
+          {/* Solo visible en sm hacia arriba */}
           <h2 className="hidden sm:block text-2xl md:text-4xl font-bold mb-4">
             Un tesoro cultural en el corazón de Boyacá
           </h2>
 
-          {/* Este párrafo solo visible en sm hacia arriba */}
+          {/* Solo visible en sm hacia arriba */}
           <p className="hidden sm:block text-base md:text-xl max-w-2xl">
             Descubre la magia de nuestras tradiciones, la belleza de nuestros
             paisajes y la calidez de nuestra gente.

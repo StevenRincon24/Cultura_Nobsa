@@ -147,19 +147,31 @@ const Navbar = () => {
                   onMouseLeave={handleMouseLeave}
                 >
                   <div
-                    onClick={() => handleSubmenuClick(item.label)}
                     className={`flex justify-between items-center gap-2 cursor-pointer px-4 py-2 rounded-md transition-all ${
                       isActive
                         ? "text-blue-600 font-bold"
                         : "text-gray-900 md:text-white md:hover:text-blue-300"
                     } hover:bg-gray-100 md:hover:bg-transparent`}
                   >
-                    <div className="flex items-center gap-2">
+                    <Link
+                      to={item.link}
+                      className="flex items-center gap-2"
+                      onClick={() => {
+                        if (window.innerWidth < 768 && hasSubmenu) {
+                          // Si es mobile y tiene submenu, primero abre el submenu en vez de navegar inmediatamente
+                          handleSubmenuClick(item.label);
+                        } else {
+                          // Si no, sigue el link normal
+                          setIsOpen(false);
+                        }
+                      }}
+                    >
                       {item.icon}
                       {item.label}
-                    </div>
+                    </Link>
                     {hasSubmenu && (
                       <FaChevronDown
+                        onClick={() => handleSubmenuClick(item.label)}
                         className={`transition-transform ${
                           openSubmenu === item.label ? "rotate-180" : ""
                         }`}
