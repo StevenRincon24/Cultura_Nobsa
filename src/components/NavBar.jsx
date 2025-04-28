@@ -99,6 +99,7 @@ const Navbar = () => {
   const hoverTextColor = isScrolled
     ? "hover:text-blue-600"
     : "hover:text-blue-300";
+  const iconColor = "text-gray-900"; // <--- Para el icono del botón hamburguesa
 
   return (
     <nav
@@ -121,7 +122,7 @@ const Navbar = () => {
         {/* Botón hamburguesa */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="absolute right-4 top-5 md:hidden text-2xl focus:outline-none"
+          className={`absolute right-4 top-5 md:hidden text-2xl focus:outline-none ${iconColor}`}
           aria-label="Toggle menu"
         >
           {isOpen ? <FaTimes /> : <FaBars />}
