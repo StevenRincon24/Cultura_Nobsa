@@ -96,6 +96,7 @@ const Navbar = () => {
   };
 
   const textColor = isScrolled ? "text-gray-900" : "text-white";
+  const mobileTextColor = "text-gray-900"; // Para siempre negro en móviles
   const hoverTextColor = isScrolled
     ? "hover:text-blue-600"
     : "hover:text-blue-300";
@@ -152,7 +153,11 @@ const Navbar = () => {
                     className={`flex justify-between items-center gap-2 cursor-pointer px-4 py-2 rounded-md transition-all ${
                       isActive
                         ? "text-blue-600 font-bold"
-                        : `${textColor} ${hoverTextColor}`
+                        : `${
+                            window.innerWidth < 768
+                              ? mobileTextColor
+                              : textColor
+                          } ${hoverTextColor}`
                     } hover:bg-gray-100 md:hover:bg-transparent`}
                   >
                     <Link
