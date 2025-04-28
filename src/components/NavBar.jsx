@@ -80,12 +80,8 @@ const Navbar = () => {
     setOpenSubmenu(null);
   }, [location]);
 
-  const handleMouseEnter = (label) => {
-    setOpenSubmenu(label);
-  };
-
-  const handleMouseLeave = () => {
-    setOpenSubmenu(null);
+  const toggleSubmenu = (label) => {
+    setOpenSubmenu(openSubmenu === label ? null : label);
   };
 
   return (
@@ -102,7 +98,7 @@ const Navbar = () => {
           <img
             src="https://i.postimg.cc/fbMZCBs1/logo-alcaldia-horizontal-nuevo.png"
             alt="Logo"
-            className="h-20"
+            className="h-16 md:h-20"
           />
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -115,63 +111,72 @@ const Navbar = () => {
 
         {/* Menu */}
         <div
-          className={`md:flex md:items-center md:ml-auto transition-all duration-300 ${
+          className={`absolute top-full left-0 w-full bg-white md:relative md:bg-transparent md:flex md:items-center md:w-auto transition-all duration-300 ${
             isOpen ? "block" : "hidden"
           }`}
         >
-          <ul className="flex flex-col md:flex-row md:space-x-4 p-4 md:p-0 " >
+          <ul className="flex flex-col md:flex-row md:space-x-6 p-4 md:p-0">
             {menuItems.map((item, index) => {
               const hasSubmenu = !!item.submenu;
               const isActive = location.pathname.includes(item.link);
 
               return (
-                <li
-                  key={index}
-                  className="relative w-full md:w-auto"
-                  onMouseEnter={() => handleMouseEnter(item.label)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <Link
-                    to={item.link}
-                    onClick={() => setIsOpen(false)}
-                    className={`flex items-center gap-2 px-4 py-2 font-semibold rounded transition-all duration-300 w-full ${
-                      isActive
-                        ? isScrolled
-                          ? "text-blue-500"
-                          : "text-blue-300"
-                        : isScrolled
-                        ? "text-gray-900"
-                        : "text-white"
-                    } hover:${isScrolled ? "bg-gray-200" : "bg-white/10"}`}
-                  >
-                    {item.icon}
-                    {item.label}
-                    {hasSubmenu && (
-                      <FaChevronDown
-                        className={`ml-1 transform transition-transform duration-200 ${
-                          openSubmenu === item.label ? "rotate-180" : ""
-                        }`}
-                      />
-                    )}
-                  </Link>
+                <li key={index} className="relative w-full md:w-auto">
+                  <div className="flex flex-col md:flex-row">
+                    <Link
+                      to={item.link}
+                      onClick={() => {
+                        setIsOpen(false);
+                        setOpenSubmenu(null);
+                      }}
+                      className={`flex items-center justify-between gap-2 px-4 py-3 font-semibold rounded transition-all duration-300 w-full ${
+                        isActive
+                          ? isScrolled
+                            ? "text-blue-500"
+                            : "text-blue-300"
+                          : isScrolled
+                          ? "text-gray-900"
+                          : "text-white"
+                      } hover:${isScrolled ? "bg-gray-100" : "bg-white/10"}`}
+                    >
+                      <span className="flex items-center gap-2">
+                        {item.icon}
+                        {item.label}
+                      </span>
+                      {hasSubmenu && (
+                        <FaChevronDown
+                          className={`transform transition-transform duration-200 ${
+                            openSubmenu === item.label ? "rotate-180" : ""
+                          }`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            toggleSubmenu(item.label);
+                          }}
+                        />
+                      )}
+                    </Link>
 
-                  {/* Submenu */}
-                  {hasSubmenu && openSubmenu === item.label && (
-                    <ul className="absolute bg-white text-gray-900 border border-gray-200 rounded shadow-md mt-0.5 w-56 z-50">
-                      {item.submenu.map((sub, idx) => (
-                        <li key={idx}>
-                          <Link
-                            to={sub.link}
-                            className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
-                            onClick={() => setIsOpen(false)}
-                          >
-                            {sub.icon}
-                            {sub.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                    {/* Submenu for Mobile */}
+                    {hasSubmenu && openSubmenu === item.label && (
+                      <ul className="flex flex-col bg-gray-100 md:absolute md:bg-white md:shadow-lg md:border md:rounded-md md:mt-2 md:w-56 z-50">
+                        {item.submenu.map((sub, idx) => (
+                          <li key={idx}>
+                            <Link
+                              to={sub.link}
+                              onClick={() => {
+                                setIsOpen(false);
+                                setOpenSubmenu(null);
+                              }}
+                              className="flex items-center gap-2 px-6 py-3 hover:bg-gray-200 text-gray-800"
+                            >
+                              {sub.icon}
+                              {sub.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
                 </li>
               );
             })}
@@ -181,7 +186,7 @@ const Navbar = () => {
               <li className="relative">
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="flex items-center gap-2 px-4 py-2 font-semibold rounded bg-blue-500 text-white transition-all"
+                  className="flex items-center gap-2 px-4 py-3 mt-2 md:mt-0 font-semibold rounded bg-blue-500 text-white transition-all"
                 >
                   {user.username}
                   <FaChevronDown
@@ -192,17 +197,17 @@ const Navbar = () => {
                 </button>
 
                 {userMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-md z-50">
+                  <div className="flex flex-col md:absolute right-0 mt-2 w-full md:w-40 bg-white border border-gray-200 rounded shadow-md z-50">
                     <Link
                       to="/perfil"
-                      className="block px-4 py-2 hover:bg-gray-100"
+                      className="block px-4 py-3 hover:bg-gray-100 text-gray-800"
                       onClick={() => setUserMenuOpen(false)}
                     >
                       Perfil
                     </Link>
                     <Link
                       to="/registro"
-                      className="block px-4 py-2 hover:bg-gray-100"
+                      className="block px-4 py-3 hover:bg-gray-100 text-gray-800"
                       onClick={() => setUserMenuOpen(false)}
                     >
                       Crear usuario
@@ -212,7 +217,7 @@ const Navbar = () => {
                         logOut(navigate);
                         setUserMenuOpen(false);
                       }}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500"
+                      className="w-full text-left px-4 py-3 hover:bg-gray-100 text-red-500"
                     >
                       <div className="flex items-center gap-2">
                         <RiLogoutCircleLine />
@@ -227,7 +232,7 @@ const Navbar = () => {
                 <Link
                   to="/login"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center gap-2 px-4 py-2 font-semibold rounded bg-blue-500 text-white hover:bg-blue-700 transition-all"
+                  className="flex items-center justify-center gap-2 px-4 py-3 font-semibold rounded bg-blue-500 text-white hover:bg-blue-700 transition-all mt-2 md:mt-0"
                 >
                   <RiLoginCircleLine />
                   Iniciar Sesión
