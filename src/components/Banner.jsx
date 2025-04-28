@@ -29,14 +29,14 @@ export default function Carousel() {
   return (
     <div className="transition-colors text-white">
       {/* Carousel Wrapper */}
-      <div className="overflow-hidden relative flex sm:h-64 xl:h-[500px] 2xl:h-[600px]">
+      <div className="overflow-hidden relative flex h-64 sm:h-64 xl:h-[500px] 2xl:h-[600px]">
         {images.map((img, index) => (
           <img
             key={index}
             src={img}
             className={`absolute w-full h-full object-cover top-0 left-0 transition-opacity duration-700 ease-in-out ${
               index === currentIndex
-                ? "opacity-100 scale-125 animate-zoom"
+                ? "opacity-100 scale-110 sm:scale-125 animate-zoom"
                 : "opacity-0 scale-100"
             }`}
             alt={`Slide ${index + 1}`}
