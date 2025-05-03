@@ -36,7 +36,7 @@ export default function ListaHoteles() {
                   <img
                     src={
                       hotel.image
-                        ? `http://localhost:3001${hotel.image}`
+                        ? `${import.meta.env.VITE_API_URL}${hotel.image}`
                         : "/images/Hoteles/hotel.jpg"
                     }
                     alt={hotel.name}
