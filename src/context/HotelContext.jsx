@@ -79,17 +79,21 @@ export function HotelProvider({ children }) {
     }
   };
 
-  const updateHotel = async (hotel) => {
+  const updateHotel = async (id, formData) => {
     try {
-      const res = await updateHotelRequest(hotel);
+      const res = await updateHotelRequest(id, formData);
 
       toast.success(res.data.message || "Actualizado exitosamente", {
         position: "top-right",
         autoClose: 3000,
       });
 
-      if (res.status === 200)
-        setHotels(hotels.map((h) => (h._id === hotel._id ? hotel : h)));
+      if (res.status === 200) {
+        const updatedHotel = res.data; // viene del backend
+        setHotels((prev) =>
+          prev.map((h) => (h._id === updatedHotel._id ? updatedHotel : h))
+        );
+      }
     } catch (error) {
       console.log("Error al actualizar el hotel:", error);
     }

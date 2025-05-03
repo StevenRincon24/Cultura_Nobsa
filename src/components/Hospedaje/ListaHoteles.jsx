@@ -32,13 +32,18 @@ export default function ListaHoteles() {
                 whileHover={{ y: -10 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="h-48 overflow-hidden">
+                <div className="h-48 w-full overflow-hidden">
                   <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaVnTP9eLj9UwFGzZzwRmEGOHLR6oGHeRvGA&s"
-                    alt={hotel.nombre}
-                    className="h-full w-full object-cover"
+                    src={
+                      hotel.image
+                        ? `http://localhost:3001${hotel.image}`
+                        : "/images/Hoteles/hotel.jpg"
+                    }
+                    alt={hotel.name}
+                    className="w-full h-full object-cover object-center block"
                   />
                 </div>
+
                 <div className="space-y-3 px-6  p-2">
                   <span
                     className={`inline-block text-sm font-medium px-2.5 py-0.5 rounded bg-blue-100 text-blue-800`}

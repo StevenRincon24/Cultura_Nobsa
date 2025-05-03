@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHotel } from "@/context/HotelContext";
 
@@ -14,31 +14,43 @@ export default function AgregarHotel({ onClose, hotelData }) {
     formState: { errors },
   } = useForm();
 
+  const [previewImage, setPreviewImage] = useState(null);
+
   useEffect(() => {
     if (hotelData) {
       Object.keys(hotelData).forEach((key) => {
         setValue(key, hotelData[key]);
       });
+      // Mostrar la imagen existente si estamos editando
+      if (`http://localhost:3001${hotelData.image}`) {
+        setPreviewImage(`http://localhost:3001${hotelData.image}`);
+      }
     }
   }, [hotelData, setValue]);
 
   const onSubmit = async (data) => {
-    try {
-      if (isEditing) {
-        await updateHotel({ ...hotelData, ...data });
+    const formData = new FormData();
+    for (const key in data) {
+      if (key === "image" && data[key][0]) {
+        formData.append(key, data[key][0]); // archivo
       } else {
-        await createHotel(data);
+        formData.append(key, data[key]);
       }
-      getHotels();
-      onClose();
-    } catch (error) {
-      console.log(error);
     }
+
+    if (isEditing) {
+      await updateHotel(hotelData._id, formData);
+    } else {
+      await createHotel(formData);
+    }
+
+    getHotels();
+    onClose();
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-30 backdrop-blur-sm">
-      <div className="bg-white p-6 rounded-lg shadow-lg text-black w-96 max-w-full">
+      <div className="bg-white p-6 rounded-lg shadow-lg text-black w-96 max-w-full max-h-[90vh] overflow-y-auto">
         <h2 className="text-xl font-bold mb-4">
           {isEditing ? "Editar Hotel" : "Agregar Nuevo Hotel"}
         </h2>
@@ -101,22 +113,43 @@ export default function AgregarHotel({ onClose, hotelData }) {
           {errors.contact && (
             <p className="text-red-500 text-sm">{errors.contact.message}</p>
           )}
-            <div className="flex justify-between mt-4">
-              <button
-                type="button"
-                onClick={onClose}
-                className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded"
-              >
-                Cancelar
-              </button>
-              <button
-                type="submit"
-                className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded"
-              >
-                Guardar
-              </button>
-            </div>
-          
+
+          <input
+            type="file"
+            accept="image/*"
+            {...register("image")}
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (file) {
+                setPreviewImage(URL.createObjectURL(file));
+              }
+            }}
+            className="w-full mb-2 p-2 border rounded"
+          />
+
+          {previewImage && (
+            <img
+              src={previewImage}
+              alt="Vista previa"
+              className="w-full h-48 object-cover rounded mb-2"
+            />
+          )}
+
+          <div className="flex justify-between mt-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded"
+            >
+              Guardar
+            </button>
+          </div>
         </form>
       </div>
     </div>

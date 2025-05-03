@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const instace = axios.create({
-  //baseURL: "http://localhost:3001/api",
-  baseURL: "https://api-cultura.vercel.app/api",
+  baseURL:  import.meta.env.VITE_API_URL,
+  //baseURLLOCAL: import.meta.env.VITE_API_URL_LOCAL,
   withCredentials: true,
 });
 

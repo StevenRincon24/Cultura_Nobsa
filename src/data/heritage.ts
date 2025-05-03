@@ -13,7 +13,7 @@ export const heritageItems: Heritage[] = [
     id: 1,
     name: "Iglesia de San Jerónimo",
     description: "Esta majestuosa iglesia de estilo colonial es uno de los principales monumentos religiosos de Nobsa. Construida en el siglo XVIII, destaca por su arquitectura clásica, sus altares tallados y sus imágenes religiosas de gran valor histórico.",
-    imageUrl: "/images/Iglesia_San_Jeronimo.jpg",
+    imageUrl: "/images/Iglesias/Iglesia_San_Jeronimo.jpg",
     type: "iglesia",
     location: "Plaza Principal de Nobsa",
     historicalValue: "Construida en 1786, ha sido testigo de eventos históricos importantes de la región y es un símbolo del patrimonio religioso de Boyacá."
@@ -38,9 +38,9 @@ export const heritageItems: Heritage[] = [
   },
   {
     id: 4,
-    name: "Iglesia Nuestra Señora del Carmen",
-    description: "Una hermosa iglesia de estilo neogótico ubicada en la vereda Puntalarga. Construida a principios del siglo XX, se destaca por sus vitrales coloridos y su altar dedicado a la Virgen del Carmen, patrona de los conductores y muy venerada en la región.",
-    imageUrl: "https://images.pexels.com/photos/2086906/pexels-photo-2086906.jpeg",
+    name: "Capilla y Convento Nuestra Señora de Belencito de Nobsa",
+    description: "Una capilla y convento religioso con arquitectura neoclásica y hermosas vidrieras que representan pasajes bíblicos. Es un lugar de culto y veneración para las comunidades locales.",
+    imageUrl: "/images/Iglesias/Belencito.jpeg",
     type: "iglesia",
     location: "Vereda Puntalarga, Nobsa",
     historicalValue: "Esta iglesia ha sido centro de peregrinaciones y celebraciones religiosas tradicionalmente asociadas con la fiesta de la Virgen del Carmen el 16 de julio."
