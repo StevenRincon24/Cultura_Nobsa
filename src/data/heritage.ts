@@ -13,7 +13,7 @@ export const heritageItems: Heritage[] = [
     id: 1,
     name: "Iglesia de San Jerónimo",
     description: "Esta majestuosa iglesia de estilo colonial es uno de los principales monumentos religiosos de Nobsa. Construida en el siglo XVIII, destaca por su arquitectura clásica, sus altares tallados y sus imágenes religiosas de gran valor histórico.",
-    imageUrl: "../../public/images/Iglesia San Jeronimo.jpg",
+    imageUrl: "/images/Iglesia_San_Jeronimo.jpg",
     type: "iglesia",
     location: "Plaza Principal de Nobsa",
     historicalValue: "Construida en 1786, ha sido testigo de eventos históricos importantes de la región y es un símbolo del patrimonio religioso de Boyacá."
