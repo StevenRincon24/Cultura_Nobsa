@@ -93,7 +93,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     async function checkLogin() {
       try {
-        const res = await validateTokenRequest(); // Axios ya incluye las cookies
+        const res = await validateTokenRequest();
         setIsAuthenticated(true);
         setUser(res.data);
       } catch (err) {
@@ -108,7 +108,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
   const logOut = async (navigate) => {
     try {
-      await logoutRequest(); // El backend elimina la cookie
+      await logoutRequest();
       setUser(null);
       setIsAuthenticated(false);
       navigate("/");
