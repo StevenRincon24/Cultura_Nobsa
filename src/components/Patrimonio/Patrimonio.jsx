@@ -58,7 +58,7 @@ const PatrimonioPage = () => {
                     ? "Todos"
                     : tab.charAt(0).toUpperCase() +
                       tab.slice(1) +
-                      (tab === "iglesia" ? "s" : "es")}
+                      (tab === "iglesia" ? "s" : "s")}
                 </button>
               ))}
             </div>
