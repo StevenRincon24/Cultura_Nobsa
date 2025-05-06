@@ -1,8 +1,73 @@
-import React from "react";
-import { Map, Navigation, Bus, MapPin } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Map, Navigation, Bus, MapPin, CloudSun } from "lucide-react";
+import {
+  FaSun,
+  FaCloud,
+  FaCloudShowersHeavy,
+  FaSnowflake,
+  FaSmog,
+  FaMoon,
+  FaCloudSun,
+  FaCloudMoon,
+} from "react-icons/fa";
+
 import Hero from "@/section/Hero";
+import axios from "axios";
 
 const TripPlanner = () => {
+  const [weather, setWeather] = useState(null);
+  const weatherTranslations = {
+    clearsky_day: "Despejado",
+    clearsky_night: "Despejado",
+    partlycloudy_day: "Parcialmente nublado",
+    partlycloudy_night: "Parcialmente nublado",
+    cloudy: "Nublado",
+    lightrain: "Lluvia ligera",
+    rain: "Lluvia",
+    heavyrain: "Lluvia fuerte",
+    lightsnow: "Nieve ligera",
+    snow: "Nieve",
+    fog: "Niebla",
+    fair_day: "Mayormente despejado",
+    fair_night: "Mayormente despejado",
+  };
+
+  const weatherIcons = {
+    clearsky_day: <FaSun size={24} />,
+    clearsky_night: <FaMoon size={24} />,
+    partlycloudy_day: <FaCloudSun size={24} />,
+    partlycloudy_night: <FaCloudMoon size={24} />,
+    cloudy: <FaCloud size={24} />,
+    lightrain: <FaCloudShowersHeavy size={24} />,
+    rain: <FaCloudShowersHeavy size={24} />,
+    heavyrain: <FaCloudShowersHeavy size={24} />,
+    lightsnow: <FaSnowflake size={24} />,
+    snow: <FaSnowflake size={24} />,
+    fog: <FaSmog size={24} />,
+    fair_day: <FaSun size={24} />,
+    fair_night: <FaMoon size={24} />,
+  };
+
+  useEffect(() => {
+    fetch(
+      "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=5.77&lon=-72.95",
+      {
+        headers: {
+          "User-Agent": "TuAppClima/1.0 (stevenrincon60@gmail.com)", // Reemplaza por tu email real
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        const current = data.properties.timeseries[0];
+        const temperature = current.data.instant.details.air_temperature;
+        const condition =
+          current.data.next_1_hours?.summary?.symbol_code || "desconocido";
+        setWeather({ temperature, condition });
+      })
+      .catch((err) => console.error("Error al obtener el clima:", err));
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Hero
@@ -22,6 +87,32 @@ const TripPlanner = () => {
             </p>
             <div className="w-24 h-1 bg-red-600 mx-auto mt-4"></div>
           </div>
+
+          {/* Clima */}
+          {weather && (
+            <div className="bg-white rounded-lg shadow-md p-6 mb-8 mx-auto max-w-md">
+              <h4 className="text-xl font-semibold mb-4 text-center">
+                Clima actual en Nobsa
+              </h4>
+              <div className="flex items-center justify-center">
+                {/* Renderiza el ícono directamente */}
+                <div className="text-red-600">
+                  {weatherIcons[weather.condition] || (
+                    <FaQuestionCircle size={24} />
+                  )}
+                </div>
+                <div className="ml-4">
+                  <p className="text-gray-700">
+                    Temperatura: {weather.temperature}°C
+                  </p>
+                  <p className="text-gray-700">
+                    Condición:{" "}
+                    {weatherTranslations[weather.condition] || "Desconocida"}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             <div>

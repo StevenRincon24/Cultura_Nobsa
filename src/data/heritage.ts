@@ -112,4 +112,15 @@ export const heritageItems: Heritage[] = [
     historicalValue: "Esta área ha sido protegida desde la década de 1980 como parte de los esfuerzos de conservación de especies de flora en peligro de extinción."
   },
   
+  // PARQUES
+  {
+    id: 12,
+    name: "Parque principal de Nobsa",
+    description: "Un fascinante recorrido ecológico que atraviesa zonas de bosque nativo donde crecen diversas especies de orquídeas y otras plantas endémicas. El sendero cuenta con estaciones informativas sobre la biodiversidad local.",
+    imageUrl: "https://images.pexels.com/photos/7015635/pexels-photo-7015635.jpeg",
+    type: "parque",
+    location: "Reserva Natural El Peligro, a 5 km del centro de Nobsa",
+    historicalValue: "Esta área ha sido protegida desde la década de 1980 como parte de los esfuerzos de conservación de especies de flora en peligro de extinción."
+  },
+  
 ];

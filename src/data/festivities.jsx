@@ -3,7 +3,7 @@ export const festivities = [
     id: 1,
     month: 1,
     date: "January 6",
-    title: "Carnival of Blacks and Whites",
+    title: "Fiestas de la Virgen de Belencito y Jesús Obrero",
     description:
       "The Carnival of Blacks and Whites (Carnaval de Negros y Blancos) is one of Colombia's largest festivals, celebrated in Pasto. The carnival features parades, music, and the tradition of painting each other with cosmetic powder and foam.",
     image:
