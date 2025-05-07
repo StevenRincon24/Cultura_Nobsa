@@ -122,5 +122,13 @@ export const heritageItems: Heritage[] = [
     location: "Reserva Natural El Peligro, a 5 km del centro de Nobsa",
     historicalValue: "Esta área ha sido protegida desde la década de 1980 como parte de los esfuerzos de conservación de especies de flora en peligro de extinción."
   },
-  
+  {
+    id: 13,
+    name: "Parque de la ruana Npbsa",
+    description: "Es una zona de protección ambiental dedicada a la conservación y promoción de la flora nativa de la región. Contiene senderos ecológicos, exhibiciones de artesanos y actividades recreativas.",
+    imageUrl: "https://images.pexels.com/photos/7015635/pexels-photo-7015635.jpeg",
+    type: "parque",
+    location: "Reserva Natural El Peligro, a 5 km del centro de Nobsa",
+    historicalValue: "Esta área ha sido protegida desde la década de 1980 como parte de los esfuerzos de conservación de especies de flora en peligro de extinción."
+  },
 ];
