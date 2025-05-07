@@ -9,6 +9,7 @@ import {
   FaMoon,
   FaCloudSun,
   FaCloudMoon,
+  FaQuestionCircle,
 } from "react-icons/fa";
 
 import Hero from "@/section/Hero";
