@@ -131,4 +131,14 @@ export const heritageItems: Heritage[] = [
     location: "Reserva Natural El Peligro, a 5 km del centro de Nobsa",
     historicalValue: "Esta área ha sido protegida desde la década de 1980 como parte de los esfuerzos de conservación de especies de flora en peligro de extinción."
   },
+  ,
+  {
+    id: 13,
+    name: "Parque del acero",
+    description: "Es un parque ubicado en Nazareth con varias cosas importantes",
+    imageUrl: "https://images.pexels.com/photos/7015635/pexels-photo-7015635.jpeg",
+    type: "parque",
+    location: "Parque Nazareth, a 5 km del centro de Nobsa",
+    historicalValue: "Este parque se realizo para algos cosas"
+  },
 ];
