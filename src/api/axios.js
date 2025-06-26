@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const instace = axios.create({
-  baseURL: import.meta.env.VITE_API_URL_VPS,
-  //baseURLLOCAL: import.meta.env.VITE_API_URL_LOCAL,
+  //baseURL: import.meta.env.VITE_API_URL_VPS,
+  baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
 });
 

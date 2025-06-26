@@ -113,6 +113,7 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(false);
       navigate("/");
     } catch (error) {
+      
       console.error("Error al cerrar sesión:", error);
     }
   };
