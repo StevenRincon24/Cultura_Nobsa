@@ -3,31 +3,45 @@ import { Attraction, CulinaryRoute, Event, Restaurant } from "../types";
 export const upcomingEvents: Event[] = [
   {
     id: 1,
-    title: "Festival de la Ruana ",
-    date: "15 de Julio, 2025",
-    description: "El festival más importante de Nobsa, celebrando su tradicional artesanía textil con desfiles, música y gastronomía local.",
-    imageUrl: "https://images.pexels.com/photos/6177607/pexels-photo-6177607.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    title: "Cumpleaños Nobsa",
+    date: "9 de Enero",
+    description: "El día 9 de enero se celebra el cumpleaños de Nobsa, una celebración que se celebra con mucha animación y festividad.",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCRVPXxahHIgjOIjBXb7BsPc5TYM_wz0vE-w&s"
   },
   {
     id: 2,
-    title: "Feria Artesanal de Nobsa",
-    date: "22 de Agosto, 2025",
+    title: "Dia mundial de la ruana",
+    date: "Mayo",
     description: "Exposición y venta de artesanías locales incluyendo tejidos, cerámica y productos elaborados con técnicas ancestrales.",
-    imageUrl: "https://images.pexels.com/photos/2253851/pexels-photo-2253851.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    imageUrl: "https://fondocultura.org/wp-content/uploads/2025/05/nobsa-dia-mundial-de-la-ruana-2025.jpg"
   },
   {
     id: 3,
-    title: "Festival Gastronómico de Boyacá",
-    date: "5 de Septiembre, 2025",
-    description: "Celebración de los sabores tradicionales de la región con platillos típicos, concursos y demostraciones culinarias.",
-    imageUrl: "https://images.pexels.com/photos/5677332/pexels-photo-5677332.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    title: "Festividad Virgen del Carmen en los diferentes sectores del Municipio",
+    date: "Junio - Agosto",
+    description: "Celebración religiosa en honor a la patrona de los conductores con procesiones, misas y actividades culturales.",
+    imageUrl: "https://static-resources-elementor.mirai.com/wp-content/uploads/sites/756/vinculacion-al-mar.jpeg"
   },
   {
     id: 4,
-    title: "Día de la Virgen del Carmen",
-    date: "16 de Julio, 2025",
-    description: "Celebración religiosa en honor a la patrona de los conductores con procesiones, misas y actividades culturales.",
-    imageUrl: "https://images.pexels.com/photos/13080076/pexels-photo-13080076.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    title: "Festividades en Honor a San Roque",
+    date: "Septiembre",
+    description: "Celebración en honor a San Roque con procesiones, misas y actividades culturales.",
+    imageUrl: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbahHPG69a-hZIE5u0_EL1YG-1TEejqjd7wO4WZvBjohI7G0IS_F9zVWkckfS8S3ZdL6IZMIVkc4h2K2lp_DNDAtr400-m_wczT5dHIgEgF0oOhmi77aTKxWnb-s231X3cSmG94154LA4/s1600/Procesi%25C3%25B3n+de+San+Roque+en+Piedralaves.jpg"
+  },
+  {
+    id: 5,
+    title: "Festival vallenato",
+    date: "Noviembre",
+    description: "Celebración del festival vallenato con procesiones, misas y actividades culturales.",
+    imageUrl: "https://viajaporcolombia.com/images/festival-vallenato-2024-en-nobsa-boyaca.jpg"
+  },
+  {
+    id: 6,
+    title: "Temporada Decembrina",
+    date: "Diciembre",
+    description: "Temporada decembrina con diferentes actividades, alumbrados decembrinos y misas.",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy9P1_6sucxnzT_-r7Z4dinoaKBVlifNtYPA&s"
   }
 ];
 
