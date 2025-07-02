@@ -7,16 +7,15 @@ const Hero = ({
   subtitle,
   imageUrl,
   ctaText,
-  ctaLink = "#",
   overlay = true,
   className = "",
 }) => {
   return (
     <div
-      className={`hero-section relative min-h-[70vh] flex items-center ${className}`}
+      className={`hero-section opacity-85 relative min-h-[70vh] flex items-center  ${className}`}
       style={{
         backgroundImage: `url(${imageUrl})`,
-        backgroundPosition: "center", // Centra la imagen
+        //backgroundPosition: "center", // Centra la imagen
         backgroundSize: "cover", // Cubre toda el área manteniendo proporción
         backgroundRepeat: "no-repeat", // No se repite
       }}

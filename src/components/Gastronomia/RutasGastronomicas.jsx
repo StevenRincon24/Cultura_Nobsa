@@ -13,9 +13,7 @@ const Gastronomy = () => {
   return (
     <div className="min-h-screen">
       <Hero
-        title="Rutas gastronomicas de Nobsa"
-        subtitle="Descubre las diferentes rutas gastronomicas de Nobsa, donde puedes degustar de la mejor comida del municipio."
-        imageUrl="https://images.pexels.com/photos/5677781/pexels-photo-5677781.jpeg"
+        imageUrl="/images/Rutas/rutas2.png"
       />
       <section id="gastronomia" className="py-16 bg-gray-100">
         <div className="container mx-auto px-4">
@@ -33,9 +31,8 @@ const Gastronomy = () => {
             {culinaryRoutes.map((route) => (
               <div
                 key={route.id}
-                className={`bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all cursor-pointer ${
-                  selectedRoute === route.id ? "ring-4 ring-red-600" : ""
-                }`}
+                className={`bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all cursor-pointer ${selectedRoute === route.id ? "ring-4 ring-red-600" : ""
+                  }`}
                 onClick={() =>
                   setSelectedRoute(selectedRoute === route.id ? null : route.id)
                 }
@@ -54,11 +51,10 @@ const Gastronomy = () => {
                   </h3>
                   <p className="text-gray-700 mb-4">{route.description}</p>
                   <button
-                    className={`w-full py-2 rounded-full transition-colors ${
-                      selectedRoute === route.id
+                    className={`w-full py-2 rounded-full transition-colors ${selectedRoute === route.id
                         ? "bg-red-600 text-white"
                         : "bg-gray-200 text-gray-800 hover:bg-gray-300"
-                    }`}
+                      }`}
                   >
                     {selectedRoute === route.id
                       ? "Ver Todos"
@@ -71,9 +67,8 @@ const Gastronomy = () => {
 
           <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
             {selectedRoute
-              ? `Restaurantes de la ${
-                  culinaryRoutes.find((r) => r.id === selectedRoute)?.name
-                }`
+              ? `Restaurantes de la ${culinaryRoutes.find((r) => r.id === selectedRoute)?.name
+              }`
               : "Todos los Restaurantes"}
           </h3>
 

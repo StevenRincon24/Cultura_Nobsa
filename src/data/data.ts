@@ -87,7 +87,7 @@ export const culinaryRoutes: CulinaryRoute[] = [
     id: "carne",
     name: "Ruta de la Carne",
     description: "Recorrido gastronómico por los establecimientos especializados en cortes de res y cerdo de la región.",
-    imageUrl: "https://images.pexels.com/photos/8969237/pexels-photo-8969237.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    imageUrl: "/images/Rutas/ruta_carne.png"
   },
   {
     id: "postres",
