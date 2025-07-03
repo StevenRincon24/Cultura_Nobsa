@@ -5,14 +5,14 @@ export default function ChatBotButton() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col-reverse md:flex-row items-end gap-4">
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col-reverse items-end gap-4">
       {open && (
-        <div className="bg-blue-200 p-2 rounded-lg shadow-lg w-[200vw] max-w-[350px] md:h-[500px] md:w-[350px]">
+        <div className="bg-white p-1 rounded-xl shadow-xl w-[90vw] max-w-[350px] h-[70vh] md:h-[500px] md:w-[350px] transition-all">
           <iframe
             src="https://www.chatbase.co/chatbot-iframe/WMJtVA5KCLEv7LpJZQ9yo"
             width="100%"
             height="100%"
-            style={{ border: "none", borderRadius: "0.5rem" }}
+            style={{ border: "none", borderRadius: "0.75rem" }}
             title="Chatbot de Nobsa"
           />
         </div>
@@ -20,7 +20,7 @@ export default function ChatBotButton() {
 
       <button
         onClick={() => setOpen(!open)}
-        className="w-16 h-20 bg-red-600 text-white rounded-full shadow-lg hover:scale-110 transition-transform flex items-center justify-center overflow-hidden p-0"
+        className="w-16 h-16 bg-red-600 text-white rounded-full shadow-lg hover:scale-110 transition-transform flex items-center justify-center overflow-hidden p-0"
       >
         {open ? (
           <IoMdClose className="text-3xl" />
@@ -28,7 +28,7 @@ export default function ChatBotButton() {
           <img
             src="/images/Gif.gif"
             alt="Chatbot Icon"
-            className="w-full h-full object-cover rounded-full "
+            className="w-full h-full object-cover"
           />
         )}
       </button>

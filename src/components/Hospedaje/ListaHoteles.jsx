@@ -68,6 +68,18 @@ export default function ListaHoteles() {
                     <Phone className="h-5 w-5 text-amber-900 mr-2 flex-shrink-0" />
                     <span>{hotel.contact}</span>
                   </div>
+
+                  <div className="flex items-start">
+                    <MapPin className="h-5 w-5 text-amber-900 mr-2 flex-shrink-0 mt-0.5" />
+                    <a
+                      href="https://maps.app.goo.gl/EaqD3es1zVy41TM37"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#c2522a] hover:underline"
+                    >
+                      Ver en google maps
+                    </a>
+                  </div>
                   <div className="flex items-center">
                     <Globe className="h-5 w-5 text-amber-900 mr-2 flex-shrink-0" />
                     <a
