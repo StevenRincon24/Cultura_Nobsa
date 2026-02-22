@@ -35,9 +35,8 @@ export default function ListaHoteles() {
                 <div className="h-48 w-full overflow-hidden">
                   <img
                     src={
-                      hotel.image
-                        ? `${import.meta.env.VITE_API_URL_LOCAL_IMAGE}${hotel.image
-                        }`
+                      hotel.image?.url
+                        ? hotel.image.url
                         : "/images/Hoteles/hotel.jpg"
                     }
                     alt={hotel.name}

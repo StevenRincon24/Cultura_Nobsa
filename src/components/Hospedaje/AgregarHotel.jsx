@@ -21,9 +21,9 @@ export default function AgregarHotel({ onClose, hotelData }) {
       Object.keys(hotelData).forEach((key) => {
         setValue(key, hotelData[key]);
       });
-      // Mostrar la imagen existente si estamos editando
-      if (`http://localhost:3001${hotelData.image}`) {
-        setPreviewImage(`http://localhost:3001${hotelData.image}`);
+
+      if (hotelData.image?.url) {
+        setPreviewImage(hotelData.image.url);
       }
     }
   }, [hotelData, setValue]);
