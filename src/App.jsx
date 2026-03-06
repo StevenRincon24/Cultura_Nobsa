@@ -24,6 +24,7 @@ import DirectionsSection from "./components/Turismo/DireccionNobsa";
 import TripPlanner from "./components/Turismo/ComoLlegar";
 import Gastronomy from "./components/Gastronomia/RutasGastronomicas";
 import Events from "./components/Fiestas/EventosNobsa";
+import ArtesaniasPage from "./components/Artesanias/Artesanias";
 // Hook personalizado para detectar si la pantalla es móvil
 function useMediaQuery(query) {
   const [matches, setMatches] = useState(false);
@@ -78,6 +79,10 @@ function App() {
 
                 <Route path="/patrimonio" element={<PatrimonioPage />} />
                 <Route path="/turismo" element={<TourismPage />} />
+                <Route
+                  path="/artesanias"
+                  element={<ArtesaniasPage />}
+                />
                 <Route path="/como-llegar" element={<TripPlanner />} />
 
                 <Route
